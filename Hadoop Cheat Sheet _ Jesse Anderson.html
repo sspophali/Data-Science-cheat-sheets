@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)http://www.jesse-anderson.com/2016/03/hadoop-cheat-sheet/ -->
+<html lang="en-US" class="js gr__jesse-anderson_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="pingback" href="http://www.jesse-anderson.com/xmlrpc.php">
+
+	<script async="" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/icons.28.svg.js.download"></script><script type="text/javascript" async="" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/recaptcha__en.js.download"></script><script async="" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/analytics.js.download"></script><script async="" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/getjs"></script><script async="" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/analytics.js.download"></script><script type="text/javascript">
+		document.documentElement.className = 'js';
+	</script>
+
+	<script>var et_site_url='http://www.jesse-anderson.com';var et_post_id='186';function et_core_page_resource_fallback(a,b){"undefined"===typeof b&&(b=a.sheet.cssRules&&0===a.sheet.cssRules.length);b&&(a.onerror=null,a.onload=null,a.href?a.href=et_site_url+"/?et_core_page_resource="+a.id+et_post_id:a.src&&(a.src=et_site_url+"/?et_core_page_resource="+a.id+et_post_id))}
+</script><title>Hadoop Cheat Sheet | Jesse Anderson</title>
+<link rel="dns-prefetch" href="http://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="http://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Jesse Anderson » Feed" href="http://www.jesse-anderson.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Jesse Anderson » Comments Feed" href="http://www.jesse-anderson.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Jesse Anderson » Hadoop Cheat Sheet Comments Feed" href="http://www.jesse-anderson.com/2016/03/hadoop-cheat-sheet/feed/">
+<!-- This site uses the Google Analytics by MonsterInsights plugin v7.3.0 - Using Analytics tracking - https://www.monsterinsights.com/ -->
+<script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.3.0';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-18524809-3';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-18524809-3', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.jesse-anderson.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Hadoop Cheat Sheet _ Jesse Anderson_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<meta content="Divi v.3.17.5" name="generator"><style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="colorbox-theme1-css" href="./Hadoop Cheat Sheet _ Jesse Anderson_files/colorbox.css" type="text/css" media="screen">
+<link rel="stylesheet" id="contact-form-7-css" href="./Hadoop Cheat Sheet _ Jesse Anderson_files/styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="et_monarch-css-css" href="./Hadoop Cheat Sheet _ Jesse Anderson_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="et-gf-open-sans-css" href="./Hadoop Cheat Sheet _ Jesse Anderson_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="divi-fonts-css" href="./Hadoop Cheat Sheet _ Jesse Anderson_files/css(1)" type="text/css" media="all">
+<link rel="stylesheet" id="divi-style-css" href="./Hadoop Cheat Sheet _ Jesse Anderson_files/style(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-markdown-prettify-css" href="./Hadoop Cheat Sheet _ Jesse Anderson_files/prettify.css" type="text/css" media="all">
+<link rel="stylesheet" id="footer-credits-css" href="./Hadoop Cheat Sheet _ Jesse Anderson_files/footer-credits.css" type="text/css" media="all">
+<link rel="stylesheet" id="dashicons-css" href="./Hadoop Cheat Sheet _ Jesse Anderson_files/dashicons.min.css" type="text/css" media="all">
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/jquery.js.download"></script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/jquery-migrate.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jQueryColorboxSettingsArray = {"jQueryColorboxVersion":"4.6.2","colorboxInline":"false","colorboxIframe":"false","colorboxGroupId":"","colorboxTitle":"","colorboxWidth":"false","colorboxHeight":"false","colorboxMaxWidth":"false","colorboxMaxHeight":"false","colorboxSlideshow":"false","colorboxSlideshowAuto":"false","colorboxScalePhotos":"false","colorboxPreloading":"false","colorboxOverlayClose":"false","colorboxLoop":"true","colorboxEscKey":"true","colorboxArrowKey":"true","colorboxScrolling":"true","colorboxOpacity":"0.85","colorboxTransition":"elastic","colorboxSpeed":"350","colorboxSlideshowSpeed":"2500","colorboxClose":"close","colorboxNext":"next","colorboxPrevious":"previous","colorboxSlideshowStart":"start slideshow","colorboxSlideshowStop":"stop slideshow","colorboxCurrent":"{current} of {total} images","colorboxXhrError":"This content failed to load.","colorboxImgError":"This image failed to load.","colorboxImageMaxWidth":"false","colorboxImageMaxHeight":"false","colorboxImageHeight":"false","colorboxImageWidth":"false","colorboxLinkHeight":"false","colorboxLinkWidth":"false","colorboxInitialHeight":"100","colorboxInitialWidth":"300","autoColorboxJavaScript":"","autoHideFlash":"","autoColorbox":"true","autoColorboxGalleries":"","addZoomOverlay":"","useGoogleJQuery":"","colorboxAddClassToLinks":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/jquery.colorbox-min.js.download"></script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/jquery-colorbox-wrapper-min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","is_debug_mode":"false","download_extensions":"","inbound_paths":"","home_url":"http:\/\/www.jesse-anderson.com","track_download_as":"event","internal_label":"int","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/frontend.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wp_flow = {"some_string":"Some string to translate","a_value":"10","wp_flow_placeholders":{"page":"page","is_single":true,"is_front_page":false,"page_title":"Hadoop Cheat Sheet","page_name":"hadoop-cheat-sheet","is_user_logged_in":false,"current_user_id":false,"post_author":"admin"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/ga-scroll-events.js.download"></script>
+<link rel="https://api.w.org/" href="http://www.jesse-anderson.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.jesse-anderson.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.jesse-anderson.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Identifying Great Training Even If You Know Nothing About the Subject" href="http://www.jesse-anderson.com/2016/03/identifying-great-training-even-if-you-know-nothing-about-the-subject/">
+<link rel="next" title="The ROI of the Right Training" href="http://www.jesse-anderson.com/2016/03/the-roi-of-the-right-training/">
+<meta name="generator" content="WordPress 4.9.8">
+<link rel="canonical" href="http://www.jesse-anderson.com/2016/03/hadoop-cheat-sheet/">
+<link rel="shortlink" href="http://www.jesse-anderson.com/?p=186">
+<link rel="alternate" type="application/json+oembed" href="http://www.jesse-anderson.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F">
+<link rel="alternate" type="text/xml+oembed" href="http://www.jesse-anderson.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;format=xml">
+<style>.addtoany_subscribe img{border:0;}</style>
+<style type="text/css" id="et-social-custom-css">
+				 margin: 0px; padding 0px;
+			</style><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><link rel="shortcut icon" href="http://www.jesse-anderson.com/wp-content/uploads/2017/09/SmokingHand-005_orig_1to1.ico"><script>
+					  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+					  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+					  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-18524809-3', 'auto');ga('send', 'pageview');
+				
+				</script><link rel="stylesheet" id="et-divi-customizer-global-cached-inline-styles" href="./Hadoop Cheat Sheet _ Jesse Anderson_files/et-divi-customizer-global-15414342981739.min.css" onerror="et_core_page_resource_fallback(this, true)" onload="et_core_page_resource_fallback(this)"><script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/repos"></script><style type="text/css">.a2a_menu,.a2a_menu *{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;float:none;margin:0;padding:0;position:static;height:auto;width:auto}.a2a_menu{border-radius:6px;display:none;direction:ltr;background:#FFF;font:16px sans-serif-light,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,Helvetica,"Liberation Sans",sans-serif;color:#000;line-height:12px;border:1px solid #CCC;vertical-align:baseline;outline:0;overflow:hidden}.a2a_mini{min-width:200px;position:absolute;width:300px;z-index:9999997}.a2a_overlay{display:none;background:#616c7d;_height:expression( ((e=document.documentElement.clientHeight)?e:document.body.clientHeight)+"px" );_width:expression( ((e=document.documentElement.clientWidth)?e:document.body.clientWidth)+"px" );filter:alpha(opacity=90);opacity:.92;position:fixed;_position:absolute;top:0;right:0;left:0;bottom:0;z-index:9999998;-webkit-tap-highlight-color:rgba(0,0,0,0);transition:opacity .14s}.a2a_full{background:#FFF;border:1px solid #FFF;height:auto;height:calc(320px);top:15%;_top:expression(40+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+"px");left:50%;margin-left:-320px;position:fixed;_position:absolute;text-align:center;width:640px;z-index:9999999;transition:transform .14s,opacity .14s}.a2a_full_footer,.a2a_full_header,.a2a_full_services{border:0;margin:0;padding:12px;box-sizing:border-box}.a2a_full_header{padding-bottom:8px}.a2a_full_services{height:280px;overflow-y:scroll;padding:0 12px;-webkit-overflow-scrolling:touch}.a2a_full_services .a2a_i{display:inline-block;float:none;width:181px;width:calc(33.334% - 18px)}div.a2a_full_footer{font-size:12px;text-align:center;padding:8px 14px}div.a2a_full_footer a,div.a2a_full_footer a:visited{display:inline;font-size:12px;line-height:14px;padding:8px 14px}div.a2a_full_footer a:focus,div.a2a_full_footer a:hover{background:0 0;border:0;color:#0166FF}div.a2a_full_footer a span.a2a_s_a2a,div.a2a_full_footer a span.a2a_w_a2a{background-size:14px;border-radius:3px;display:inline-block;height:14px;line-height:14px;margin:0 3px 0 0;vertical-align:top;*vertical-align:middle;width:14px}.a2a_modal{height:0;left:50%;margin-left:-320px;position:fixed;_position:absolute;text-align:center;top:15%;_top:expression(40+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+"px");width:640px;z-index:9999999;transition:transform .14s,opacity .14s;-webkit-tap-highlight-color:rgba(0,0,0,0)}.a2a_modal_body{background:0 0;border:0;font:24px sans-serif-light,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,Helvetica,"Liberation Sans",sans-serif;position:relative;height:auto;width:auto}.a2a_thanks{color:#fff;height:auto;margin-top:20px;width:auto}.a2a_thanks>div:first-child{margin:0 0 40px 0}.a2a_thanks div *{height:inherit}#a2a_copy_link{background:#FFF;border:1px solid #FFF;margin-top:15%}span.a2a_s_link#a2a_copy_link_icon,span.a2a_w_link#a2a_copy_link_icon{background-size:48px;border-radius:0;display:inline-block;height:48px;left:0;line-height:48px;margin:0 3px 0 0;position:absolute;vertical-align:top;*vertical-align:middle;width:48px}#a2afeed_modal input#a2a_copy_link_text{background-color:transparent;_background-color:#FFF;border:0;color:#2A2A2A;font:inherit;height:48px;left:62px;max-width:initial;padding:0;position:relative;width:564px;width:calc(100% - 76px)}#a2a_copy_link_copied{background-color:#0166ff;color:#fff;display:none;font:inherit;font-size:16px;margin-top:1px;padding:3px 8px}@media print{.a2a_floating_style,.a2a_menu,.a2a_overlay{visibility:hidden}}@keyframes a2aFadeIn{from{opacity:0}to{opacity:1}}.a2a_starting{opacity:0}.a2a_starting.a2a_full,.a2a_starting.a2a_modal{transform:scale(.8)}@media (max-width:639px){.a2a_full{border-radius:0;top:15%;left:0;margin-left:auto;width:100%}.a2a_modal{left:0;margin-left:10px;width:calc(100% - 20px)}}@media (min-width:318px) and (max-width:437px){.a2a_full .a2a_full_services .a2a_i{width:calc(50% - 18px)}}@media (max-width:317px){.a2a_full .a2a_full_services .a2a_i{width:calc(100% - 18px)}}@media (max-height:436px){.a2a_full{bottom:40px;height:auto;top:40px}}.a2a_menu a{color:#0166FF;text-decoration:none;font:16px sans-serif-light,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,Helvetica,"Liberation Sans",sans-serif;line-height:14px;height:auto;width:auto;outline:0;-moz-outline:none}.a2a_menu a.a2a_i:visited,.a2a_menu a.a2a_more{color:#0166FF}.a2a_menu a.a2a_i:active,.a2a_menu a.a2a_i:focus,.a2a_menu a.a2a_i:hover,.a2a_menu a.a2a_more:active,.a2a_menu a.a2a_more:focus,.a2a_menu a.a2a_more:hover{color:#2A2A2A;border-color:#EEE;border-style:solid;background-color:#EEE;text-decoration:none}.a2a_menu span.a2a_s_find{background-size:24px;height:24px;left:8px;position:absolute;top:7px;width:24px}.a2a_menu span.a2a_s_find svg{background-color:#FFF}.a2a_menu span.a2a_s_find svg path{fill:#CCC}#a2a_menu_container{display:inline-block}#a2a_menu_container{_display:inline}.a2a_menu_find_container{border:1px solid #CCC;border-radius:6px;padding:2px 24px 2px 0;position:relative;text-align:left}.a2a_cols_container .a2a_col1{overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}#a2afeed_modal input,#a2afeed_modal input[type=text],.a2a_menu input,.a2a_menu input[type=text]{display:block;background-image:none;box-shadow:none;line-height:100%;margin:0;outline:0;overflow:hidden;padding:0;-moz-box-shadow:none;-webkit-box-shadow:none;-webkit-appearance:none}#a2afeed_find_container input,#a2afeed_find_container input[type=text]{background-color:transparent;_background-color:#FFF;border:0;box-sizing:content-box;color:#2A2A2A;font:inherit;font-size:16px;height:28px;line-height:20px;left:38px;outline:0;margin:0;max-width:initial;padding:2px 0;position:relative;width:99%}.a2a_clear{clear:both} .a2a_svg{background-repeat:no-repeat;display:block;overflow:hidden;height:32px;line-height:32px;padding:0;width:32px}.a2a_svg svg{background-repeat:no-repeat;background-position:50% 50%;border:none;display:block;left:0;margin:0 auto;overflow:hidden;padding:0;position:relative;top:0;width:auto;height:auto}a.a2a_i,i.a2a_i{display:block;float:left;border:1px solid #FFF;line-height:24px;padding:6px 8px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:132px}a.a2a_i span,a.a2a_more span{display:inline-block;overflow:hidden;vertical-align:top;*vertical-align:middle}a.a2a_i .a2a_svg{margin:0 6px 0 0}a.a2a_i .a2a_svg,a.a2a_more .a2a_svg{background-size:24px;height:24px;line-height:24px;width:24px}a.a2a_sss:hover{border-left:1px solid #CCC}a.a2a_menu_show_more_less{border-bottom:1px solid #FFF;border-left:0;border-right:0;line-height:24px;margin:6px 0 0;padding:6px;-webkit-touch-callout:none}a.a2a_menu_show_more_less span{display:inline-block;height:24px;margin:0 6px 0 0}.a2a_kit .a2a_svg{background-repeat:repeat}.a2a_default_style a{float:left;line-height:16px;padding:0 2px}.a2a_default_style a:hover .a2a_svg,.a2a_floating_style a:hover .a2a_svg,.a2a_overlay_style a:hover .a2a_svg svg{opacity:.7}.a2a_overlay_style.a2a_default_style a:hover .a2a_svg{opacity:1}.a2a_default_style .a2a_count,.a2a_default_style .a2a_svg,.a2a_floating_style .a2a_svg,.a2a_menu .a2a_svg,.a2a_vertical_style .a2a_count,.a2a_vertical_style .a2a_svg{border-radius:4px}.a2a_default_style .a2a_counter img,.a2a_default_style .a2a_dd,.a2a_default_style .a2a_svg{float:left}.a2a_default_style .a2a_img_text{margin-right:4px}.a2a_default_style .a2a_divider{border-left:1px solid #000;display:inline;float:left;height:16px;line-height:16px;margin:0 5px}.a2a_kit a{cursor:pointer}.a2a_floating_style{background-color:#fff;border-radius:6px;position:fixed}.a2a_floating_style,.a2a_overlay_style{animation:a2aFadeIn .2s ease-in;padding:4px;z-index:9999995}.a2a_vertical_style a{clear:left;display:block;overflow:hidden;padding:4px;text-decoration:none}.a2a_floating_style.a2a_default_style{bottom:0}.a2a_floating_style.a2a_default_style a,.a2a_overlay_style.a2a_default_style a{padding:4px}.a2a_count{background-color:#fff;border:1px solid #ccc;box-sizing:border-box;color:#2a2a2a;display:block;float:left;font:12px Arial,Helvetica,sans-serif;height:16px;margin-left:4px;position:relative;text-align:center;width:50px}.a2a_count:after,.a2a_count:before{border:solid transparent;border-width:4px 4px 4px 0;content:"";height:0;left:0;line-height:0;margin:-4px 0 0 -4px;position:absolute;top:50%;width:0}.a2a_count:before{border-right-color:#ccc}.a2a_count:after{border-right-color:#fff;margin-left:-3px}.a2a_count span{animation:a2aFadeIn .14s ease-in}.a2a_vertical_style .a2a_counter img{display:block}.a2a_vertical_style .a2a_count{float:none;margin-left:0;margin-top:6px}.a2a_vertical_style .a2a_count:after,.a2a_vertical_style .a2a_count:before{border:solid transparent;border-width:0 4px 4px 4px;content:"";height:0;left:50%;line-height:0;margin:-4px 0 0 -4px;position:absolute;top:0;width:0}.a2a_vertical_style .a2a_count:before{border-bottom-color:#ccc}.a2a_vertical_style .a2a_count:after{border-bottom-color:#fff;margin-top:-3px}.a2a_nowrap{white-space:nowrap}.a2a_note{margin:0 auto;padding:9px;font-size:12px;text-align:center}.a2a_note .a2a_note_note{margin:0;color:#2A2A2A}.a2a_wide a{display:block;margin-top:3px;border-top:1px solid #EEE;text-align:center}.a2a_label{position:absolute!important;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);clip-path:polygon(0 0,0 0,0 0);-webkit-clip-path:polygon(0 0,0 0,0 0);overflow:hidden;height:1px;width:1px}.a2a_kit,.a2a_menu,.a2a_modal,.a2a_overlay{-ms-touch-action:manipulation;touch-action:manipulation}.a2a_dd img{border:0}.a2a_button_facebook_like iframe{max-width:none}</style><style>[data-columns]::before{visibility:hidden;position:absolute;font-size:1px;}</style><style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
+<body class="post-template-default single single-post postid-186 single-format-standard et_divi_builder et_bloom et_monarch et_pb_button_helper_class et_fixed_nav et_show_nav et_cover_background et_pb_gutter windows et_pb_gutters3 et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_fade et_pb_footer_columns4 et_header_style_left et_right_sidebar et_divi_theme et-db et_minified_js et_minified_css chrome" data-gr-c-s-loaded="true">
+	<div id="page-container" class="et-animated-content" style="padding-top: 80px; margin-top: -27px;">
+
+	
+	
+			<header id="main-header" data-height-onload="80" data-height-loaded="true" data-fixed-height-onload="54" class="et-fixed-header" style="top: 0px;">
+			<div class="container clearfix et_menu_container">
+							<div class="logo_container">
+					<span class="logo_helper"></span>
+					<a href="http://www.jesse-anderson.com/">
+						<img src="./Hadoop Cheat Sheet _ Jesse Anderson_files/SmokingHand-005-Edit_crop_200x200.jpg" alt="Jesse Anderson" id="logo" data-height-percentage="54" data-actual-width="200" data-actual-height="200">
+					</a>
+				</div>
+							<div id="et-top-navigation" data-height="66" data-fixed-height="40" style="padding-left: 73px;">
+											<nav id="top-menu-nav">
+													<ul id="top-menu" class="nav">
+																	<li><a href="http://www.jesse-anderson.com/">Home</a></li>
+								
+								<li class="page_item page-item-850 page_item_has_children"><a href="http://www.jesse-anderson.com/books/">Books</a>
+<ul class="children">
+	<li class="page_item page-item-854"><a href="http://www.jesse-anderson.com/books/data-engineering-teams/">Data Engineering Teams</a></li>
+	<li class="page_item page-item-857"><a href="http://www.jesse-anderson.com/books/the-ultimate-guide-to-switching-careers-to-big-data/">The Ultimate Guide to Switching Careers to Big Data</a></li>
+</ul>
+</li>
+<li class="page_item page-item-851 page_item_has_children"><a href="http://www.jesse-anderson.com/courses/">Courses</a>
+<ul class="children">
+	<li class="page_item page-item-548"><a href="http://www.jesse-anderson.com/courses/big-data-engineering/">Big Data Engineering</a></li>
+	<li class="page_item page-item-555"><a href="http://www.jesse-anderson.com/courses/real-time-data-pipelines/">Real-time Data Pipelines</a></li>
+</ul>
+</li>
+<li class="page_item page-item-32"><a href="http://www.jesse-anderson.com/aboutme/">About Me</a></li>
+<li class="page_item page-item-34"><a href="http://www.jesse-anderson.com/bibliography/">Bibliography</a></li>
+<li class="page_item page-item-36"><a href="http://www.jesse-anderson.com/contact/">Contact</a></li>
+									<li class="cat-item cat-item-3"><a href="http://www.jesse-anderson.com/category/blog/" title="Main blog.">Blog</a>
+<ul class="children">
+	<li class="cat-item cat-item-95"><a href="http://www.jesse-anderson.com/category/blog/business/">Business</a>
+</li>
+	<li class="cat-item cat-item-94"><a href="http://www.jesse-anderson.com/category/blog/data-engineering/">Data Engineering</a>
+</li>
+	<li class="cat-item cat-item-133"><a href="http://www.jesse-anderson.com/category/blog/data-engineering-is-hard/" title="Posts about why data engineering is hard and you need to specialize in it.">Data Engineering is hard</a>
+</li>
+	<li class="cat-item cat-item-51"><a href="http://www.jesse-anderson.com/category/blog/magnumopus/" title="The blog posts I think represent a great post or project.">Magnum Opus</a>
+</li>
+	<li class="cat-item cat-item-55"><a href="http://www.jesse-anderson.com/category/blog/million-monkeys-blog/" title="The posts related to the Million Monkeys project where I randomly recreated Shakespeare using Hadoop.">Million Monkeys</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://www.jesse-anderson.com/category/blog/nnsdgblog/" title="These are the blog posts I make on the Northern Nevada Software Developers Group blog.">NNSDG Blog</a>
+</li>
+</ul>
+</li>
+							</ul>
+												</nav>
+					
+					
+					
+										<div id="et_top_search">
+						<span id="et_search_icon"></span>
+					</div>
+					
+					<div id="et_mobile_nav_menu">
+				<div class="mobile_nav closed">
+					<span class="select_page">Select Page</span>
+					<span class="mobile_menu_bar mobile_menu_bar_toggle"></span>
+				<ul id="mobile_menu" class="et_mobile_menu">
+																	<li class="et_first_mobile_item"><a href="http://www.jesse-anderson.com/">Home</a></li>
+								
+								<li class="page_item page-item-850 page_item_has_children"><a href="http://www.jesse-anderson.com/books/">Books</a>
+<ul class="children">
+	<li class="page_item page-item-854"><a href="http://www.jesse-anderson.com/books/data-engineering-teams/">Data Engineering Teams</a></li>
+	<li class="page_item page-item-857"><a href="http://www.jesse-anderson.com/books/the-ultimate-guide-to-switching-careers-to-big-data/">The Ultimate Guide to Switching Careers to Big Data</a></li>
+</ul>
+</li>
+<li class="page_item page-item-851 page_item_has_children"><a href="http://www.jesse-anderson.com/courses/">Courses</a>
+<ul class="children">
+	<li class="page_item page-item-548"><a href="http://www.jesse-anderson.com/courses/big-data-engineering/">Big Data Engineering</a></li>
+	<li class="page_item page-item-555"><a href="http://www.jesse-anderson.com/courses/real-time-data-pipelines/">Real-time Data Pipelines</a></li>
+</ul>
+</li>
+<li class="page_item page-item-32"><a href="http://www.jesse-anderson.com/aboutme/">About Me</a></li>
+<li class="page_item page-item-34"><a href="http://www.jesse-anderson.com/bibliography/">Bibliography</a></li>
+<li class="page_item page-item-36"><a href="http://www.jesse-anderson.com/contact/">Contact</a></li>
+									<li class="cat-item cat-item-3"><a href="http://www.jesse-anderson.com/category/blog/" title="Main blog.">Blog</a>
+<ul class="children">
+	<li class="cat-item cat-item-95"><a href="http://www.jesse-anderson.com/category/blog/business/">Business</a>
+</li>
+	<li class="cat-item cat-item-94"><a href="http://www.jesse-anderson.com/category/blog/data-engineering/">Data Engineering</a>
+</li>
+	<li class="cat-item cat-item-133"><a href="http://www.jesse-anderson.com/category/blog/data-engineering-is-hard/" title="Posts about why data engineering is hard and you need to specialize in it.">Data Engineering is hard</a>
+</li>
+	<li class="cat-item cat-item-51"><a href="http://www.jesse-anderson.com/category/blog/magnumopus/" title="The blog posts I think represent a great post or project.">Magnum Opus</a>
+</li>
+	<li class="cat-item cat-item-55"><a href="http://www.jesse-anderson.com/category/blog/million-monkeys-blog/" title="The posts related to the Million Monkeys project where I randomly recreated Shakespeare using Hadoop.">Million Monkeys</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://www.jesse-anderson.com/category/blog/nnsdgblog/" title="These are the blog posts I make on the Northern Nevada Software Developers Group blog.">NNSDG Blog</a>
+</li>
+</ul>
+</li>
+							</ul></div>
+			</div>				</div> <!-- #et-top-navigation -->
+			</div> <!-- .container -->
+			<div class="et_search_outer">
+				<div class="container et_search_form_container">
+					<form role="search" method="get" class="et-search-form" action="http://www.jesse-anderson.com/">
+					<input type="search" class="et-search-field" placeholder="Search …" value="" name="s" title="Search for:">					</form>
+					<span class="et_close_search_field"></span>
+				</div>
+			</div>
+		</header> <!-- #main-header -->
+			<div id="et-main-area">
+	
+<div id="main-content">
+		<div class="container">
+		<div id="content-area" class="clearfix">
+			<div id="left-area">
+											<article id="post-186" class="et_pb_post post-186 post type-post status-publish format-standard hentry category-blog category-business category-data-engineering tag-big-data-cheat-sheet tag-hadoop-cheat-sheet">
+											<div class="et_post_meta_wrapper">
+							<h1 class="entry-title">Hadoop Cheat Sheet</h1>
+
+						<p class="post-meta"><a href="http://www.jesse-anderson.com/author/admin/" title="Posts by Jesse" rel="author">Jesse</a><a href="https://plus.google.com/108919242744373260262" rel="author" title="Google Plus Profile for +" plugin="Google Plus Authorship">+</a> by <span class="author vcard"></span> | <span class="published">Mar 24, 2016</span> | <a href="http://www.jesse-anderson.com/category/blog/" rel="category tag">Blog</a>, <a href="http://www.jesse-anderson.com/category/blog/business/" rel="category tag">Business</a>, <a href="http://www.jesse-anderson.com/category/blog/data-engineering/" rel="category tag">Data Engineering</a> | <span class="comments-number"><a href="http://www.jesse-anderson.com/2016/03/hadoop-cheat-sheet/#respond">0 comments</a></span></p>
+												</div> <!-- .et_post_meta_wrapper -->
+				
+					<div class="entry-content">
+					<div class="et_social_inline et_social_mobile_on et_social_inline_top">
+				<div class="et_social_networks et_social_4col et_social_slide et_social_rounded et_social_left et_social_no_animation et_social_withcounts et_social_withnetworknames et_social_outer_dark">
+					
+					<ul class="et_social_icons_container"><li class="et_social_facebook">
+									<a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;t=Hadoop%20Cheat%20Sheet" class="et_social_share et_social_display_count" rel="nofollow" data-social_name="facebook" data-post_id="186" data-social_type="share" data-location="inline" data-min_count="0">
+										<i class="et_social_icon et_social_icon_facebook"></i><div class="et_social_network_label"><div class="et_social_networkname">Facebook</div><div class="et_social_count">
+						<span>0</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_twitter">
+									<a href="http://twitter.com/share?text=Hadoop%20Cheat%20Sheet&amp;url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;via=jessetanderson" class="et_social_share" rel="nofollow" data-social_name="twitter" data-post_id="186" data-social_type="share" data-location="inline">
+										<i class="et_social_icon et_social_icon_twitter"></i><div class="et_social_network_label"><div class="et_social_networkname">Twitter</div><div class="et_social_count">
+						<span>6</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_linkedin">
+									<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share et_social_display_count" rel="nofollow" data-social_name="linkedin" data-post_id="186" data-social_type="share" data-location="inline" data-min_count="0">
+										<i class="et_social_icon et_social_icon_linkedin"></i><div class="et_social_network_label"><div class="et_social_networkname">LinkedIn</div><div class="et_social_count">
+						<span>0</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_digg">
+									<a href="http://digg.com/submit?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="digg" data-post_id="186" data-social_type="share" data-location="inline">
+										<i class="et_social_icon et_social_icon_digg"></i><div class="et_social_network_label"><div class="et_social_networkname">Digg</div><div class="et_social_count">
+						<span>3</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_googleplus">
+									<a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;t=Hadoop%20Cheat%20Sheet" class="et_social_share et_social_display_count" rel="nofollow" data-social_name="googleplus" data-post_id="186" data-social_type="share" data-location="inline" data-min_count="0">
+										<i class="et_social_icon et_social_icon_googleplus"></i><div class="et_social_network_label"><div class="et_social_networkname">Google+</div><div class="et_social_count">
+						<span>1</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_reddit">
+									<a href="http://www.reddit.com/submit?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share et_social_display_count" rel="nofollow" data-social_name="reddit" data-post_id="186" data-social_type="share" data-location="inline" data-min_count="0">
+										<i class="et_social_icon et_social_icon_reddit"></i><div class="et_social_network_label"><div class="et_social_networkname">reddit</div><div class="et_social_count">
+						<span>0</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_hackernews">
+									<a href="https://news.ycombinator.com/submitlink?u=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;t=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="hackernews" data-post_id="186" data-social_type="share" data-location="inline">
+										<i class="et_social_icon et_social_icon_hackernews"></i><div class="et_social_network_label"><div class="et_social_networkname">Hacker News</div><div class="et_social_count">
+						<span>5</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_delicious">
+									<a href="https://del.icio.us/post?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share et_social_display_count" rel="nofollow" data-social_name="delicious" data-post_id="186" data-social_type="share" data-location="inline" data-min_count="0">
+										<i class="et_social_icon et_social_icon_delicious"></i><div class="et_social_network_label"><div class="et_social_networkname">Delicious</div><div class="et_social_count">
+						<span>0</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li></ul>
+				</div>
+			</div><p>Hadoop has a vast and vibrant developer community. &nbsp;Following the lead of Hadoop’s name, the projects in the Hadoop ecosystem all have names that don’t correlate to their function. &nbsp;This makes it really hard to figure out what each piece does or is used for. &nbsp;This is a&nbsp;cheat sheet&nbsp;to help you keep track of things. &nbsp;It is broken up into their respective general functions.</p>
+<table style="border-style: solid; border-width: 0px;" border="0" cellpadding="5">
+<tbody>
+<tr>
+<td style="padding-bottom: 10px; border-top-width: 0px;" colspan="4" valign="middle">
+<h2>Distributed Systems</h2>
+</td>
+</tr>
+<tr style="background-color: #a3b8c9;">
+<td style="border-width: 1px; border-style: solid;"><strong>Name</strong></td>
+<td style="border-width: 1px; border-style: solid;"><strong>What It Is</strong></td>
+<td style="border-width: 1px; border-style: solid;"><strong>What It Does</strong></td>
+<td style="border-width: 1px; border-style: solid;"><strong>How It Helps</strong></td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://hadoop.apache.org/hdfs/">HDFS</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">A Distributed Filesystem for Hadoop</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Acts as the filesystem or storage for Hadoop.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Improves the data input performance of MapReduce jobs with data locality. Creates a replicated, scalable file system.</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://cassandra.apache.org/">Cassandra</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">A NoSQL database</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">A highly scalable database.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Allows you to scale a database in linear fashion. Can handle huge databases without bogging down.</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://hbase.apache.org/">HBase</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">A NoSQL database</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Uses HDFS to create a highly scalable database.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Allows high scalability. Allows you to do random reads and writes with HDFS.</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://zookeeper.apache.org/">Zookeeper</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">A Distributed Synchronization&nbsp;Service</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Provides synchronization of data&nbsp;amongst&nbsp;distributed nodes.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Allows a cluster to maintain consistent, distributed data across all nodes in a cluster.</td>
+</tr>
+<tr>
+<td style="padding-bottom: 10px; padding-top: 20px;" colspan="4" valign="middle">
+<h2>Processing Data</h2>
+</td>
+</tr>
+<tr style="background-color: #a3b8c9;">
+<td style="border-width: 1px; border-style: solid;"><strong>Name</strong></td>
+<td style="border-width: 1px; border-style: solid;"><strong><strong>What It Is</strong></strong></td>
+<td style="border-width: 1px; border-style: solid;"><strong>What It Does</strong></td>
+<td style="border-width: 1px; border-style: solid;"><strong>How It Helps</strong></td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://hadoop.apache.org/mapreduce/">MapReduce</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Distributed Programming Model and Software Framework</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Breaks up a job into multiple tasks and processes them simultaneously.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Framework abstracts the difficult pieces of&nbsp;distributed&nbsp;systems. &nbsp;Allows vast quantities of data to be processed simultaneously.</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://spark.apache.org/">Spark</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">General Purpose Processing Framework</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Breaks up a job into multiple tasks and processes them simultaneously.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Framework abstracts the difficult pieces of&nbsp;distributed&nbsp;systems. Has more built-in funcntionality than MapReduce, like SQL.</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://hive.apache.org/">Hive</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Data Warehouse System</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Allows use of query language to process data.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Helps SQL programmers harness MapReduce by creating SQL-like queries.</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://pig.apache.org/">Pig</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Data Analysis Platform</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Processes data using a scripting&nbsp;language</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Helps programmers use a scripting language to harness MapReduce power.</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://mahout.apache.org/">Mahout</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Machine Learning Library</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Use a prewritten library to run machine learning algorithms on MapReduce.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Prevents you from having to rewrite machine learning algorithms to use MapReduce. Speeds up development time by using existing code.</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://giraph.apache.org/">Giraph</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Graph Processing Library</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Use a prewritten library to run graph algorithms on MapReduce.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Prevents you from having to rewrite graph algorithms to use MapReduce. Speeds up development time by using existing code.</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://mrunit.apache.org/">MRUnit</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Unit Test Framework for MapReduce</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Run tests to verify your MapReduce job functions correctly.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Run programmatic&nbsp;tests to verify that a MapReduce program acts correctly. Has objects that allow you to mock up inputs and assertions to verify the results.</td>
+</tr>
+<tr>
+<td style="padding-bottom: 10px; padding-top: 20px;" colspan="4" valign="middle">
+<h2>Getting Data In/Out</h2>
+</td>
+</tr>
+<tr style="background-color: #a3b8c9;">
+<td style="border-width: 1px; border-style: solid;"><strong>Name</strong></td>
+<td style="border-width: 1px; border-style: solid;"><strong><strong>What It Is</strong></strong></td>
+<td style="border-width: 1px; border-style: solid;"><strong>What It Does</strong></td>
+<td style="border-width: 1px; border-style: solid;"><strong>How It Helps</strong></td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://avro.apache.org/">Avro</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Data Serialization System</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Gives an easy method to input and output data from MapReduce or Spark jobs.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Creates domain objects to store data. Makes easier data serialization and deserialization for MapReduce jobs.</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://sqoop.apache.org/">Sqoop</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Bulk Data Transfer</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Moves data between Relational Databases and Hadoop.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Allows data dumps from the Relational Database to be placed in Hadoop for processing later. Moves data output from a MapReduce job to be placed back in a Relational Database.</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="https://cwiki.apache.org/FLUME/">Flume</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Data Aggregator</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Handles large amounts of log data in a scalable fashion.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Moves large amounts of log data into HDFS. Since Flume scales so well, it can handle a lot of incoming data.</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://kafka.apache.org/">Kafka</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Distributed Publish/Subscribe</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Handles very high throughput and low latency message passing in a scalable fashion.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Decouples systems to allow many subscribers of published data.</td>
+</tr>
+<tr>
+<td style="padding-bottom: 10px; padding-top: 20px;" colspan="4" valign="middle">
+<h2>Administration</h2>
+</td>
+</tr>
+<tr style="background-color: #a3b8c9;">
+<td style="border-width: 1px; border-style: solid;"><strong>Name</strong></td>
+<td style="border-width: 1px; border-style: solid;"><strong><strong>What It Is</strong></strong></td>
+<td style="border-width: 1px; border-style: solid;"><strong>What It Does</strong></td>
+<td style="border-width: 1px; border-style: solid;"><strong>How It Helps</strong></td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://cloudera.github.com/hue/">Hue</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Browser Based Interface for Hadoop</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Allows users to interact with the Hadoop cluster over a web browser.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Makes it easier for users to interact with the Hadoop cluster. Granular permissions allow&nbsp;administrators&nbsp;to configure users’</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://incubator.apache.org/oozie/">Oozie</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Workflow Engine for Hadoop</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Makes creating complex workflows in Hadoop easier to create.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Allows you to create a complex workflow that leverages other projects like Hive, Pig, and MapReduce. Built-in logic allows users to handle failures of steps gracefully.</td>
+</tr>
+<tr>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top"><a href="http://www.cloudera.com/products-services/tools/">Cloudera Manager</a></td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Browser Based Manager for Hadoop</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Allows easy configuration and configuration of Hadoop cluster.</td>
+<td style="border-width: 1px; border-style: solid; background-color: #f7fbfd;" valign="top">Eases the burden of dealing with and monitoring a large Hadoop Cluster. Helps install and configuration the Hadoop software.</td>
+</tr>
+</tbody>
+</table>
+<p>The easiest&nbsp;way to install all of these programs is via <a href="http://www.cloudera.com/hadoop/">CDH</a> or Cloudera Distribution for Hadoop. &nbsp;The free edition of <a href="http://www.cloudera.com/products-services/tools/">Cloudera Manager</a> makes it even easier to create your cluster.</p>
+<div class="et_social_inline et_social_mobile_on et_social_inline_bottom">
+				<div class="et_social_networks et_social_4col et_social_slide et_social_rounded et_social_left et_social_no_animation et_social_withcounts et_social_withnetworknames et_social_outer_dark">
+					
+					<ul class="et_social_icons_container"><li class="et_social_facebook">
+									<a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;t=Hadoop%20Cheat%20Sheet" class="et_social_share et_social_display_count" rel="nofollow" data-social_name="facebook" data-post_id="186" data-social_type="share" data-location="inline" data-min_count="0">
+										<i class="et_social_icon et_social_icon_facebook"></i><div class="et_social_network_label"><div class="et_social_networkname">Facebook</div><div class="et_social_count">
+						<span>0</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_twitter">
+									<a href="http://twitter.com/share?text=Hadoop%20Cheat%20Sheet&amp;url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;via=jessetanderson" class="et_social_share" rel="nofollow" data-social_name="twitter" data-post_id="186" data-social_type="share" data-location="inline">
+										<i class="et_social_icon et_social_icon_twitter"></i><div class="et_social_network_label"><div class="et_social_networkname">Twitter</div><div class="et_social_count">
+						<span>6</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_linkedin">
+									<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share et_social_display_count" rel="nofollow" data-social_name="linkedin" data-post_id="186" data-social_type="share" data-location="inline" data-min_count="0">
+										<i class="et_social_icon et_social_icon_linkedin"></i><div class="et_social_network_label"><div class="et_social_networkname">LinkedIn</div><div class="et_social_count">
+						<span>0</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_digg">
+									<a href="http://digg.com/submit?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="digg" data-post_id="186" data-social_type="share" data-location="inline">
+										<i class="et_social_icon et_social_icon_digg"></i><div class="et_social_network_label"><div class="et_social_networkname">Digg</div><div class="et_social_count">
+						<span>3</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_googleplus">
+									<a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;t=Hadoop%20Cheat%20Sheet" class="et_social_share et_social_display_count" rel="nofollow" data-social_name="googleplus" data-post_id="186" data-social_type="share" data-location="inline" data-min_count="0">
+										<i class="et_social_icon et_social_icon_googleplus"></i><div class="et_social_network_label"><div class="et_social_networkname">Google+</div><div class="et_social_count">
+						<span>1</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_reddit">
+									<a href="http://www.reddit.com/submit?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share et_social_display_count" rel="nofollow" data-social_name="reddit" data-post_id="186" data-social_type="share" data-location="inline" data-min_count="0">
+										<i class="et_social_icon et_social_icon_reddit"></i><div class="et_social_network_label"><div class="et_social_networkname">reddit</div><div class="et_social_count">
+						<span>0</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_hackernews">
+									<a href="https://news.ycombinator.com/submitlink?u=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;t=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="hackernews" data-post_id="186" data-social_type="share" data-location="inline">
+										<i class="et_social_icon et_social_icon_hackernews"></i><div class="et_social_network_label"><div class="et_social_networkname">Hacker News</div><div class="et_social_count">
+						<span>5</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_delicious">
+									<a href="https://del.icio.us/post?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share et_social_display_count" rel="nofollow" data-social_name="delicious" data-post_id="186" data-social_type="share" data-location="inline" data-min_count="0">
+										<i class="et_social_icon et_social_icon_delicious"></i><div class="et_social_network_label"><div class="et_social_networkname">Delicious</div><div class="et_social_count">
+						<span>0</span>
+					</div></div><span class="et_social_overlay"></span>
+									</a>
+								</li></ul>
+				</div>
+			</div><span class="et_bloom_bottom_trigger"></span><span class="et_social_bottom_trigger"></span>					</div> <!-- .entry-content -->
+					<div class="et_post_meta_wrapper">
+					
+					
+					<!-- You can start editing here. -->
+
+<section id="comment-wrap">
+		   <div id="comment-section" class="nocomments">
+		  			 <!-- If comments are open, but there are no comments. -->
+
+		  	   </div>
+					<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"><span>Submit a Comment</span> <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://www.jesse-anderson.com/2016/03/hadoop-cheat-sheet/#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="http://www.jesse-anderson.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span></p><div class="wmd-panel"><div id="wmd-button-barcomment"><ul id="wmd-button-rowcomment" class="wmd-button-row"><li class="wmd-button" id="wmd-bold-buttoncomment" title="Strong &lt;strong&gt; Ctrl+B" style="left: 0px;"><span style="background-position: 0px 0px;"></span></li><li class="wmd-button" id="wmd-italic-buttoncomment" title="Emphasis &lt;em&gt; Ctrl+I" style="left: 25px;"><span style="background-position: -20px 0px;"></span></li><li class="wmd-spacer wmd-spacer1" id="wmd-spacer1comment"></li><li class="wmd-button" id="wmd-link-buttoncomment" title="Hyperlink &lt;a&gt; Ctrl+L" style="left: 75px;"><span style="background-position: -40px 0px;"></span></li><li class="wmd-button" id="wmd-quote-buttoncomment" title="Blockquote &lt;blockquote&gt; Ctrl+Q" style="left: 100px;"><span style="background-position: -60px 0px;"></span></li><li class="wmd-button" id="wmd-code-buttoncomment" title="Code Sample &lt;pre&gt;&lt;code&gt; Ctrl+K" style="left: 125px;"><span style="background-position: -80px 0px;"></span></li><li class="wmd-button" id="wmd-image-buttoncomment" title="Image &lt;img&gt; Ctrl+G" style="left: 150px;"><span style="background-position: -100px 0px;"></span></li><li class="wmd-spacer wmd-spacer2" id="wmd-spacer2comment"></li><li class="wmd-button" id="wmd-olist-buttoncomment" title="Numbered List &lt;ol&gt; Ctrl+O" style="left: 200px;"><span style="background-position: -120px 0px;"></span></li><li class="wmd-button" id="wmd-ulist-buttoncomment" title="Bulleted List &lt;ul&gt; Ctrl+U" style="left: 225px;"><span style="background-position: -140px 0px;"></span></li><li class="wmd-button" id="wmd-heading-buttoncomment" title="Heading &lt;h1&gt;/&lt;h2&gt; Ctrl+H" style="left: 250px;"><span style="background-position: -160px 0px;"></span></li><li class="wmd-button" id="wmd-hr-buttoncomment" title="Horizontal Rule &lt;hr&gt; Ctrl+R" style="left: 275px;"><span style="background-position: -180px 0px;"></span></li><li class="wmd-spacer wmd-spacer3" id="wmd-spacer3comment"></li><li class="wmd-button" id="wmd-undo-buttoncomment" title="Undo - Ctrl+Z" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li><li class="wmd-button" id="wmd-redo-buttoncomment" title="Redo - Ctrl+Y" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li><li class="wmd-button wmd-help-button" id="wmd-help-buttoncomment" title="Markdown Editing Help" style="right: 0px;"><span style="background-position: -240px 0px;"></span></li></ul></div><div id="wmd-button-bar-help" style="display: none;"> <p>To create code blocks or other preformatted text, indent by four spaces:</p>
+        <pre class="wmd-help"><span class="wmd-help-spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>This will be displayed in a monospaced font. The first four 
+<span class="wmd-help-spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>spaces will be stripped off, but all other whitespace
+<span class="wmd-help-spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>will be preserved.
+<span class="wmd-help-spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="wmd-help-spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>Markdown is turned off in code blocks:
+<span class="wmd-help-spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span> [This is not a link](http://example.com)
+</pre>
+        <p>
+            To create not a block, but an inline code span, use backticks:
+        </p>
+        <pre class="wmd-help">Here is some inline `code`.</pre> <p>For more help see <a href="http://daringfireball.net/projects/markdown/syntax" rel="no-follow"> http://daringfireball.net/projects/markdown/syntax</a></p></div><p class="comment-form-comment"><label for="comment" style="display: none;">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><div id="wmd-previewcomment" class="wmd-panel wmd-preview prettyprint"><p>Comment</p></div></div><p class="comment-form-author"><label for="author" style="display: none;">Name</label> <input id="author" name="author" type="text" value="" size="30" maxlength="245"></p>
+<p class="comment-form-email"><label for="email" style="display: none;">Email</label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes"></p>
+<p class="comment-form-url"><label for="url" style="display: none;">Website</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200"></p>
+<p class="form-submit"> <input type="hidden" name="comment_post_ID" value="186" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><div class="g-recaptcha" data-sitekey="6LeNEBkTAAAAACN0kERnklNwF8k_iaD7jWK92dEC" data-theme="standard"><div style="width: 304px; height: 78px;"><div><iframe src="./Hadoop Cheat Sheet _ Jesse Anderson_files/anchor.html" width="304" height="78" role="presentation" name="a-8kxno289f2si" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div></div><script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/api.js.download"></script>            <div id="recaptcha-submit-btn-area">&nbsp;<input name="submit" type="submit" id="submit" class="submit et_pb_button" value="Submit Comment" tabindex="6"></div>
+            <noscript>
+            <style type='text/css'>#submit {display:none;}</style>
+            <input name="submit" type="submit" id="submit-alt" tabindex="6"
+                value="Submit Comment"/> 
+            </noscript>			</form>
+			</div><!-- #respond -->
+		</section>					</div> <!-- .et_post_meta_wrapper -->
+				</article> <!-- .et_pb_post -->
+
+						</div> <!-- #left-area -->
+
+				<div id="sidebar">
+		<div id="text-5" class="et_pb_widget widget_text"><h4 class="widgettitle">Become a Data Engineer</h4>			<div class="textwidget"><a href="http://www.jesse-anderson.com/big-data-engineering/">Are you tired of materials that don't go beyond the basics of data engineering?
+<br>Become a Data Engineer</a></div>
+		</div> <!-- end .et_pb_widget --><div id="text-4" class="et_pb_widget widget_text"><h4 class="widgettitle">AWS Screencast</h4>			<div class="textwidget"><iframe border="0px" height="182px" seamless="true" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/v-jacloud.html" width="155px">
+Buy Now
+</iframe></div>
+		</div> <!-- end .et_pb_widget --><div id="add_to_any_subscribe_widget-3" class="et_pb_widget widget_add_to_any_subscribe_widget">
+		<span class="a2a_kit a2a_follow" data-a2a-url="http://www.jesse-anderson.com/feed/" style="line-height: 16px;"><a class="a2a_dd addtoany_subscribe" href="https://www.addtoany.com/subscribe?linkurl=http%3A%2F%2Fwww.jesse-anderson.com%2Ffeed%2F&amp;linkname=Jesse%20Anderson"><img src="./Hadoop Cheat Sheet _ Jesse Anderson_files/subscribe_120_16.png" width="120" height="16" alt="Subscribe"></a></span>
+		
+<script>
+var a2a_config = a2a_config || {};
+</script>
+<script async="" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/page.js.download">
+</script>
+</div> <!-- end .et_pb_widget --><div id="better-gh-widget-2" class="et_pb_widget better-gh-widget"><h4 class="widgettitle">GitHub</h4><img width="128px" alt="GitHub Octocat" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/octocat.png" style="display: block; margin: 0px auto;"><p style="text-align: center; "><a href="http://github.com/eljefe6a/">eljefe6a</a> @ GitHub</p><ul id="gh-repos"><li><a href="https://github.com/eljefe6a/yaka">yaka</a><p>Yet Another Kafka API</p></li><li><a href="https://github.com/eljefe6a/RemarkMacros">RemarkMacros</a><p>Some macros I've created for Remark.</p></li><li><a href="https://github.com/eljefe6a/kafkainitd">kafkainitd</a><p>Init.d scripts for Kafka. Will work out of the box with Confluent Data Platform.</p></li><li><a href="https://github.com/eljefe6a/CodePreprocessor">CodePreprocessor</a><p>Python based code pre-processor to include source code and highlight it with asterisks.</p></li><li><a href="https://github.com/eljefe6a/incubator-beam">incubator-beam</a><p>Mirror of Apache Beam (Incubating)</p></li><li><a href="https://github.com/eljefe6a/beamexample">beamexample</a><p>An example Apache Beam project.</p></li><li><a href="https://github.com/eljefe6a/KafkaRESTHelper">KafkaRESTHelper</a><p>Helper JavaScript code to make it easier to interface with the Kafka REST server and JQuery.</p></li><li><a href="https://github.com/eljefe6a/incubator-beam-site">incubator-beam-site</a><p>Mirror of Apache Beam site (Incubating)</p></li><li><a href="https://github.com/eljefe6a/demos">demos</a><p>Stream processing demo</p></li><li><a href="https://github.com/eljefe6a/decktape">decktape</a><p>PDF exporter for HTML presentation frameworks</p></li><li><a href="https://github.com/eljefe6a/kafka">kafka</a><p>Mirror of Apache Kafka</p></li><li><a href="https://github.com/eljefe6a/pipeline">pipeline</a><p>Complete Pipeline Training at Big Data Scala By the Bay</p></li><li><a href="https://github.com/eljefe6a/hbase-1.0-api-examples">hbase-1.0-api-examples</a><p>Examples for upgrading HBase applications to 1.0 APIs</p></li><li><a href="https://github.com/eljefe6a/nfldata">nfldata</a><p>Combining datasets with MapReduce on NFL play by play data.</p></li><li><a href="https://github.com/eljefe6a/FinancialMapReduce">FinancialMapReduce</a><p>Some examples of using financial data in MapReduce programs.</p></li><li><a href="https://github.com/eljefe6a/kite">kite</a><p>Kite SDK</p></li><li><a href="https://github.com/eljefe6a/UnoExample">UnoExample</a><p>MapReduce/Hadoop example that uses regular playing cards to show mapping and reducing.</p></li><li><a href="https://github.com/eljefe6a/cdk-examples">cdk-examples</a><p>Cloudera Development Kit Examples</p></li><li><a href="https://github.com/eljefe6a/BoggleMapReduce">BoggleMapReduce</a><p>A program to use MapReduce and Graph Theory to efficiently and scalably find all words in a Boggle roll. </p></li><li><a href="https://github.com/eljefe6a/HBaseThrift">HBaseThrift</a><p>Sample code for working with HBase Thrift.</p></li><li><a href="https://github.com/eljefe6a/HBaseREST">HBaseREST</a><p>Sample Python code for working with the HBase REST interface</p></li><li><a href="https://github.com/eljefe6a/BreadthFirstSearch">BreadthFirstSearch</a><p>A very simple implementation of the Breadth First Search algorithm using Hadoop</p></li><li><a href="https://github.com/eljefe6a/CardSecondarySort">CardSecondarySort</a><p>Hadoop Secondary Sort example using playing cards</p></li><li><a href="https://github.com/eljefe6a/renocosts">renocosts</a><p>Taking open data from the city of Reno to merge payroll, fire and police data.</p></li></ul><script src="./Hadoop Cheat Sheet _ Jesse Anderson_files/github.js.download" type="text/javascript"> </script><script type="text/javascript">
+        github.showRepos({
+            user: 'eljefe6a',
+            count: 0,
+            skip_forks: false,
+        });
+  </script>
+</div> <!-- end .et_pb_widget -->	</div> <!-- end #sidebar -->
+		</div> <!-- #content-area -->
+	</div> <!-- .container -->
+	</div> <!-- #main-content -->
+
+
+			<footer id="main-footer">
+				
+
+		
+				<div id="footer-bottom">
+					<div class="container clearfix">
+				<ul class="et-social-icons">
+
+	<li class="et-social-icon et-social-facebook">
+		<a href="http://www.jesse-anderson.com/2016/03/hadoop-cheat-sheet/#" class="icon">
+			<span>Facebook</span>
+		</a>
+	</li>
+	<li class="et-social-icon et-social-twitter">
+		<a href="http://www.jesse-anderson.com/2016/03/hadoop-cheat-sheet/#" class="icon">
+			<span>Twitter</span>
+		</a>
+	</li>
+	<li class="et-social-icon et-social-google-plus">
+		<a href="http://www.jesse-anderson.com/2016/03/hadoop-cheat-sheet/#" class="icon">
+			<span>Google</span>
+		</a>
+	</li>
+	<li class="et-social-icon et-social-rss">
+		<a href="http://www.jesse-anderson.com/feed/" class="icon">
+			<span>RSS</span>
+		</a>
+	</li>
+
+</ul><p id="footer-info">Designed by <a href="http://www.elegantthemes.com/" title="Premium WordPress Themes">Elegant Themes</a> | Powered by <a href="http://www.wordpress.org/">WordPress</a></p>					</div>	<!-- .container -->
+				</div>
+			</footer> <!-- #main-footer -->
+		</div> <!-- #et-main-area -->
+
+
+	</div> <!-- #page-container -->
+
+	<div class="et_social_sidebar_networks et_social_visible_sidebar et_social_slideright et_social_animated et_social_rectangle et_social_sidebar_flip et_social_mobile_on" style="top: 161px;">
+					
+					<ul class="et_social_icons_container"><li class="et_social_facebook">
+									<a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;t=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="facebook" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_facebook"></i>
+										
+										
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_twitter">
+									<a href="http://twitter.com/share?text=Hadoop%20Cheat%20Sheet&amp;url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;via=jessetanderson" class="et_social_share" rel="nofollow" data-social_name="twitter" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_twitter"></i>
+										
+										<div class="et_social_count">
+						<span>6</span>
+					</div>
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_linkedin">
+									<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="linkedin" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_linkedin"></i>
+										
+										
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_digg">
+									<a href="http://digg.com/submit?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="digg" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_digg"></i>
+										
+										<div class="et_social_count">
+						<span>3</span>
+					</div>
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_googleplus">
+									<a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;t=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="googleplus" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_googleplus"></i>
+										
+										
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_reddit">
+									<a href="http://www.reddit.com/submit?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="reddit" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_reddit"></i>
+										
+										
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_hackernews">
+									<a href="https://news.ycombinator.com/submitlink?u=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;t=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="hackernews" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_hackernews"></i>
+										
+										<div class="et_social_count">
+						<span>5</span>
+					</div>
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_delicious">
+									<a href="https://del.icio.us/post?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="delicious" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_delicious"></i>
+										
+										
+										<span class="et_social_overlay"></span>
+									</a>
+								</li></ul>
+					<span class="et_social_hide_sidebar et_social_icon"></span>
+				</div><div class="et_social_mobile_button"></div>
+					<div class="et_social_mobile et_social_fadein">
+						<div class="et_social_heading">Share This</div>
+						<span class="et_social_close"></span>
+						<div class="et_social_networks et_social_simple et_social_rounded et_social_left" style="display: none; max-height: 45px; height: 45px;">
+							<ul class="et_social_icons_container"><li class="et_social_facebook">
+									<a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;t=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="facebook" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_facebook"></i>
+										<div class="et_social_network_label"><div class="et_social_networkname">Facebook</div></div>
+										
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_twitter">
+									<a href="http://twitter.com/share?text=Hadoop%20Cheat%20Sheet&amp;url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;via=jessetanderson" class="et_social_share" rel="nofollow" data-social_name="twitter" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_twitter"></i>
+										<div class="et_social_network_label"><div class="et_social_networkname">Twitter</div></div>
+										
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_linkedin">
+									<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="linkedin" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_linkedin"></i>
+										<div class="et_social_network_label"><div class="et_social_networkname">LinkedIn</div></div>
+										
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_digg">
+									<a href="http://digg.com/submit?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="digg" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_digg"></i>
+										<div class="et_social_network_label"><div class="et_social_networkname">Digg</div></div>
+										
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_googleplus">
+									<a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;t=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="googleplus" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_googleplus"></i>
+										<div class="et_social_network_label"><div class="et_social_networkname">Google+</div></div>
+										
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_reddit">
+									<a href="http://www.reddit.com/submit?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="reddit" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_reddit"></i>
+										<div class="et_social_network_label"><div class="et_social_networkname">reddit</div></div>
+										
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_hackernews">
+									<a href="https://news.ycombinator.com/submitlink?u=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;t=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="hackernews" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_hackernews"></i>
+										<div class="et_social_network_label"><div class="et_social_networkname">Hacker News</div></div>
+										
+										<span class="et_social_overlay"></span>
+									</a>
+								</li><li class="et_social_delicious">
+									<a href="https://del.icio.us/post?url=http%3A%2F%2Fwww.jesse-anderson.com%2F2016%2F03%2Fhadoop-cheat-sheet%2F&amp;title=Hadoop%20Cheat%20Sheet" class="et_social_share" rel="nofollow" data-social_name="delicious" data-post_id="186" data-social_type="share" data-location="sidebar">
+										<i class="et_social_icon et_social_icon_delicious"></i>
+										<div class="et_social_network_label"><div class="et_social_networkname">Delicious</div></div>
+										
+										<span class="et_social_overlay"></span>
+									</a>
+								</li></ul>
+						</div>
+					</div>
+					<div class="et_social_mobile_overlay"></div>	<div style="position: static;"><div class="a2a_overlay" id="a2afeed_overlay"></div><div id="a2afeed_modal" class="a2a_modal" role="dialog" tabindex="-1" aria-label="" style="display:none"><div class="a2a_modal_body a2a_menu a2a_thanks" id="a2afeed_thanks" style="display:none"><div class="a2a_localize" data-a2a-localize="inner,ThanksForSharing">Thanks for sharing!</div></div></div><div class="a2a_menu a2a_full a2a_localize" id="a2afeed_full" role="dialog" tabindex="-1" aria-label="Subscribe" data-a2a-localize="title,Subscribe"><div class="a2a_full_header"><div id="a2afeed_find_container" class="a2a_menu_find_container"><input id="a2afeed_find" class="a2a_menu_find a2a_localize" type="text" onclick="a2a.focus_find()" onkeyup="a2a.do_find()" autocomplete="off" title="Find any service" data-a2a-localize="title,FindAnyServiceToAddTo"><span id="a2afeed_find_icon" class="a2a_svg a2a_s_find" onclick="a2a.focus_find()"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#CCC" d="M19.7 18.2l-4.5-4.5c.7-1.1 1.2-2.3 1.2-3.6 0-3.5-2.8-6.3-6.3-6.3s-6.3 2.8-6.3 6.3 2.8 6.3 6.3 6.3c1.4 0 2.6-.4 3.6-1.2l4.5 4.5c.6.6 1.3.7 1.7.2.5-.4.4-1.1-.2-1.7zm-9.6-3.6c-2.5 0-4.5-2.1-4.5-4.5 0-2.5 2.1-4.5 4.5-4.5 2.5 0 4.5 2.1 4.5 4.5s-2 4.5-4.5 4.5z"></path></svg></span></div></div><div class="a2a_full_services" id="a2afeed_full_services" role="presentation"><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#feed" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_feed" style="background-color: rgb(227, 112, 45);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><ellipse cx="7.952" cy="24.056" rx="2.952" ry="2.944"></ellipse><path d="M5.153 16.625c2.73 0 5.295 1.064 7.22 2.996a10.2 10.2 0 0 1 2.996 7.255h4.2c0-7.962-6.47-14.44-14.42-14.44v4.193zm.007-7.432c9.724 0 17.636 7.932 17.636 17.682H27C27 14.812 17.203 5 5.16 5v4.193z"></path></g></svg></span>Feed </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#feedly" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_feedly" style="background-color: rgb(43, 178, 76);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M6.33 16.118L18.507 4h.536l2.566 2.507v.597l-11.4 11.402H8.282l-1.956-1.85m4.855 4.106l7.323-7.316h.536l2.567 2.507v.597l-6.546 6.598-1.922.194-1.955-2.043m4.774 4.31l2.605-2.464h.538l2.567 2.508v.597L19.84 28h-1.924l-1.956-1.85" fill="#FFF"></path></svg></span>Feedly </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#my_yahoo" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_yahoo" style="background-color: rgb(64, 0, 144);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M21.495 6.097c1.09.31 2.213.28 3.304 0l-7.42 12.09v9.91a4.366 4.366 0 0 0-1.37-.22c-.47 0-.937.065-1.404.22v-9.91L7.19 6.097c1.09.28 2.213.31 3.304 0l5.516 8.788 5.483-8.787z"></path></svg></span>My Yahoo </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#feedblitz" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_feedblitz" style="background-color: rgb(255, 139, 35);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M14.935 6.168l2.89.446v5.695h.12c1.094-.937 2.556-.886 4.376-.886 2.065 0 3.61.568 4.638 1.706 1.03 1.14 1.544 2.94 1.544 5.4 0 2.517-.69 4.392-2.062 5.623C25.053 25.386 23.11 26 20.598 26c-1.233 0-3.025-.643-3.025-.44 0 .297.482.19-2.637.19V6.167zm2.89 17.54a6.61 6.61 0 0 0 1.385.35c.548.083 1.13.125 1.745.125 1.393 0 2.495-.462 3.312-1.386.815-.922 1.224-2.345 1.224-4.266 0-.8-.07-1.52-.22-2.163a5.005 5.005 0 0 0-.68-1.666 3.15 3.15 0 0 0-1.202-1.076c-.498-.25-1.09-.377-1.788-.377-.963 0-1.76.2-2.39.602-.63.4-1.09.945-1.384 1.635v8.224zM12.6 7.888c-.432-.044-.84-.07-1.23-.07-.557 0-.986.076-1.292.224-.305.15-.534.382-.688.7-.15.317-.247.723-.29 1.216-.042.495-.062 6.307-.062 7.015l3.09.02.316 2.6-3.406-.02v6.176h-3v-6.18H3.5l.466-2.6H6.04v-5.99c0-1.753.375-3.02 1.126-3.804C7.913 6.39 9.19 6 10.994 6c.722 0 1.376.028 1.96.084" fill="#FFF"></path></svg></span>FeedBlitz </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#my_aol" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_aol" style="background-color: rgb(42, 42, 42);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M17.334 13.26c-2.315 0-4.067 1.8-4.067 4.027 0 2.35 1.824 4.03 4.067 4.03 2.243 0 4.062-1.68 4.062-4.03 0-2.228-1.744-4.027-4.062-4.027zm0 2.127c1-.007 1.82.847 1.82 1.9 0 1.048-.82 1.9-1.82 1.9s-1.818-.853-1.818-1.9c0-1.053.817-1.9 1.818-1.9zm11.59 4.518c0 .778-.63 1.412-1.41 1.412a1.41 1.41 0 1 1 1.41-1.412zm-4.104 1.418h-2.216v-10.28h2.216v10.28zM9.33 11.04s2.585 6.79 3.862 10.13c.015.037.028.078.047.132-.06.006-.106.01-.15.01-.83.002-1.665-.003-2.498.004-.12.002-.17-.04-.204-.156-.116-.385-.247-.766-.365-1.147-.032-.11-.074-.153-.193-.153-1.066.006-2.132.006-3.2 0-.1 0-.142.03-.173.13-.127.405-.26.81-.39 1.21-.02.076-.05.117-.136.117-.873-.006-1.75-.004-2.623-.004-.016 0-.036-.005-.07-.012.023-.06.04-.115.064-.17 1.287-3.306 3.91-10.085 3.91-10.085h2.12zm-.023 6.674c-.343-1.147-.68-2.274-1.02-3.4h-.03l-1.017 3.4h2.067z" fill="#FFF"></path></svg></span>AOL Reader </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#oldreader" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_oldreader" style="background-color: rgb(215, 63, 49);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="none" d="M31.873 8.063c.043 0 .084-.006.127-.006V0h-8.057c0 .043-.006.084-.006.127a7.935 7.935 0 0 0 7.936 7.936zM16 7.398A17.519 17.519 0 0 1 7.398 16 17.519 17.519 0 0 1 16 24.602 17.519 17.519 0 0 1 24.602 16 17.523 17.523 0 0 1 16 7.398zM.127 23.938c-.043 0-.084.005-.127.006V32h8.057c0-.043.006-.084.006-.127a7.935 7.935 0 0 0-7.936-7.935zm17.46 7.935c0 .043.003.084.003.127h3.176c0-.043-.004-.084-.004-.127 0-6.137 4.975-11.11 11.11-11.11.044 0 .085.002.128.003V17.59l-.127-.002c-7.89 0-14.286 6.395-14.286 14.285zM.127 14.413h.008C8.022 14.41 14.413 8.016 14.413.13c0-.043-.003-.084-.003-.127h-3.176c0 .044.003.085.003.128 0 6.14-4.974 11.11-11.11 11.11H0v3.176c.04 0 .078.004.118.004h.01zm0 3.175c-.043 0-.084.002-.127.003v3.18c.043 0 .084-.005.127-.005 6.137 0 11.11 4.975 11.11 11.11 0 .044-.003.085-.003.128h3.176c0-.042.003-.083.003-.126 0-7.89-6.396-14.285-14.286-14.285z"></path><path fill="none" d="M23.938 31.873c0 .043.005.084.006.127H32v-8.057c-.043 0-.084-.006-.127-.006a7.934 7.934 0 0 0-7.935 7.936zm7.926-17.46h.018c.04 0 .08-.003.118-.003v-3.176c-.043 0-.084.003-.127.003-6.137 0-11.11-4.973-11.11-11.11 0-.043.002-.084.003-.127H17.59c0 .043-.003.084-.003.127 0 7.887 6.392 14.28 14.277 14.286zM8.062.127c0-.043-.006-.084-.006-.127H0v8.057c.043 0 .084.006.127.006A7.935 7.935 0 0 0 8.062.127z"></path><path fill="#FFF" d="M14.41 32h.006c0-.043-.003-.084-.003-.127 0 .043-.003.084-.003.127z"></path><path fill="#FFF" d="M14.413 31.873c0-2.596.57-5.057 1.587-7.27A17.52 17.52 0 0 0 7.398 16a17.391 17.391 0 0 1-7.27 1.587c-.044 0-.085-.003-.128-.003v.007h.127c7.89 0 14.286 6.396 14.286 14.286zM.127 20.763c-.043 0-.084.002-.127.003v3.178c.043 0 .084-.006.127-.006a7.936 7.936 0 0 1 7.936 7.935c0 .043-.006.084-.006.127h3.178c0-.043.003-.084.003-.127 0-6.137-4.974-11.11-11.11-11.11zM32 14.415v-.006h-.118c.04 0 .08.004.118.004zM16 7.398A17.519 17.519 0 0 0 24.602 16a17.383 17.383 0 0 1 7.263-1.587c-7.886-.005-14.277-6.4-14.277-14.286 0-.043.003-.084.003-.127h-.002c0 .043.003.084.003.127 0 2.596-.572 5.057-1.59 7.27zm15.873 3.84c.043 0 .084-.003.127-.004V8.057c-.043 0-.084.006-.127.006A7.934 7.934 0 0 1 23.938.127c0-.043.005-.084.006-.127h-3.178c0 .043-.004.084-.004.127 0 6.137 4.974 11.11 11.11 11.11z"></path><path fill="#FFF" d="M17.587 31.873c0-7.89 6.396-14.285 14.286-14.285.043 0 .084.002.127.003v-3.17c-.04 0-.078-.003-.118-.003h-.018c-2.593 0-5.05.572-7.263 1.587a17.549 17.549 0 0 0-8.6 8.603 17.421 17.421 0 0 0-1.585 7.27c0 .044.003.085.003.128h3.174l-.002-.126z"></path><path fill="#FFF" d="M20.762 31.873c0 .043.003.084.004.127h3.178c0-.043-.006-.084-.006-.127a7.934 7.934 0 0 1 7.935-7.935c.043 0 .084.005.127.006v-3.178c-.043 0-.084-.004-.127-.004-6.137 0-11.11 4.974-11.11 11.11zM7.398 16A17.523 17.523 0 0 0 16 7.398a17.385 17.385 0 0 0 1.587-7.27c0-.044-.003-.085-.003-.128H14.41c0 .043.003.084.003.127 0 7.887-6.392 14.28-14.278 14.286H.117c-.04 0-.078-.003-.117-.003v3.174c.043 0 .084.003.127.003 2.596 0 5.057-.57 7.27-1.587z"></path><path fill="#FFF" d="M11.237.127c0-.043-.003-.084-.003-.127H8.057c0 .043.006.084.006.127A7.936 7.936 0 0 1 .127 8.063c-.043 0-.084-.006-.127-.006v3.178c.043 0 .084.003.127.003 6.137 0 11.11-4.974 11.11-11.11z"></path></svg></span>The Old Reader </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#agregator" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_agregator" style="background-color: rgb(53, 148, 64);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M16 5C9.926 5 5 9.925 5 16c0 6.074 4.926 11 11 11s11-4.926 11-11c0-6.075-4.926-11-11-11zm-4.953 17.77c-1.003 0-1.816-.812-1.816-1.812s.817-1.812 1.82-1.812c1.004 0 1.817.812 1.817 1.812s-.813 1.812-1.817 1.812zm4.564-.08c0-1.69-.65-3.27-1.84-4.46s-2.763-1.846-4.443-1.846v-2.58c4.894 0 8.873 3.986 8.873 8.885h-2.59zm4.576.002c0-6-4.87-10.88-10.854-10.88V9.23c7.41 0 13.44 6.037 13.44 13.46h-2.586z"></path></svg></span>Agregator </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#bitty_browser_preview" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_bitty" style="background-color: rgb(153, 153, 153);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M4 4h12v12H4z"></path><path d="M20 4v16H4v8h24V4"></path></g></svg></span>Bitty Browser Preview </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#daily_rotation" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_dailyrotation" style="background-color: rgb(42, 42, 42);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M16.7 26.862V5.138h5.34c1.345 0 2.32.195 2.928.585.61.39 1.098 1.084 1.463 2.082.37.998.55 2.14.55 3.424 0 1.63-.274 2.97-.83 4.035-.553 1.06-1.382 1.73-2.49 2.007a7.827 7.827 0 0 1 1.365 1.823c.356.663.838 1.837 1.444 3.526L28 26.863h-3.035l-1.835-4.726c-.65-1.69-1.097-2.755-1.338-3.194-.24-.44-.494-.74-.763-.905-.275-.162-.698-.245-1.28-.245h-.516v9.07H16.7zm2.537-12.536h1.88c1.215 0 1.976-.09 2.278-.27.304-.175.54-.48.712-.916.173-.434.257-.98.257-1.63 0-.73-.11-1.322-.34-1.772-.224-.448-.543-.732-.955-.85-.21-.05-.828-.075-1.855-.075h-1.98v5.513zM4 5.138h4.64c1.045 0 1.844.14 2.392.415.737.375 1.367 1.042 1.894 2 .526.96.928 2.132 1.2 3.52.276 1.39.41 3.102.41 5.137 0 1.785-.128 3.328-.385 4.623-.31 1.58-.76 2.86-1.34 3.838a4.667 4.667 0 0 1-1.786 1.736c-.56.31-1.307.46-2.244.46H4V5.138zm2.538 3.674v14.39h1.894c.71 0 1.223-.068 1.536-.207.41-.18.753-.48 1.024-.903.27-.424.492-1.125.663-2.097.172-.974.26-2.3.26-3.98 0-1.678-.088-2.97-.26-3.867-.17-.9-.41-1.602-.72-2.104-.31-.504-.7-.846-1.175-1.023-.353-.135-1.047-.205-2.08-.205H6.537z" fill="#FFF"></path></svg></span>Daily Rotation </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#feed_mailer" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_feedmailer" style="background-color: rgb(120, 168, 209);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><ellipse cx="7.952" cy="24.056" rx="2.952" ry="2.944"></ellipse><path d="M5.153 16.625c2.73 0 5.295 1.064 7.22 2.996a10.2 10.2 0 0 1 2.996 7.255h4.2c0-7.962-6.47-14.44-14.42-14.44v4.193zm.007-7.432c9.724 0 17.636 7.932 17.636 17.682H27C27 14.812 17.203 5 5.16 5v4.193z"></path></g></svg></span>Feed Mailer </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#feedbucket" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_feedbucket" style="background-color: rgb(227, 112, 45);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M6.918 4l1.05 24h16.065l1.05-24H6.917zm5.424 21c-.74 0-1.342-.6-1.342-1.338a1.342 1.342 0 1 1 2.684 0A1.34 1.34 0 0 1 12.342 25zm3.37-.06a4.63 4.63 0 0 0-1.36-3.295 4.605 4.605 0 0 0-3.282-1.36v-1.907c3.614 0 6.555 2.944 6.555 6.564h-1.912zm3.377.003c0-4.432-3.6-8.037-8.02-8.037V15c5.475 0 9.93 4.46 9.93 9.943h-1.91z"></path></svg></span>FeedBucket </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#itunes" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_itunes" style="background-color: rgb(251, 35, 58);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M16 3C8.82 3 3 8.82 3 16s5.82 13 13 13 13-5.82 13-13S23.18 3 16 3zm0 23.4c-5.743 0-10.4-4.656-10.4-10.4 0-5.744 4.657-10.4 10.4-10.4S26.4 10.256 26.4 16c0 5.744-4.657 10.4-10.4 10.4zm4.76-6.916c.084 1.105-.746 2.11-1.853 2.25-1.108.137-2.076-.646-2.158-1.752-.09-1.105.744-2.113 1.85-2.25.35-.043.687.004.986.127v-5.43l-5.2.963v6.783h-.012a.242.242 0 0 1 .007.054c.086 1.108-.744 2.113-1.85 2.25-1.11.138-2.075-.645-2.16-1.75-.084-1.106.746-2.114 1.854-2.25.35-.045.686.005.986.13v-7.82l7.545-1.29.007-.003h.004l-.003.035v9.894h-.01a.4.4 0 0 1 .01.054z"></path></svg></span>iTunes </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#miro" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_miro" style="background-color: rgb(212, 23, 0);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M28.316 9.983c-3.055-2.55-6.135-3.597-9.06-3.57C11.78 6.478 5.33 13.56 3 20.47c18.74 13.006 28.804-1.863 25.316-10.487zm-4.794 5.66v5.767H20.63v-6.04c0-1.1-2.01-1.33-2.01 0v5.992h-2.9v-5.97c0-1.174-2-1.16-2 0v5.97h-2.93v-8.94s6.648.02 9.86.02c3.21 0 2.872 3.202 2.872 3.202z"></path></svg></span>Miro </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#netvibes" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_netvibes" style="background-color: rgb(124, 169, 0);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M13.09 8h5.82v16h-5.82z"></path><path d="M8 13.09h16v5.82H8z"></path></g></svg></span>Netvibes </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#newsalloy" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_newsalloy" style="background-color: rgb(142, 43, 61);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M23.78 7.35l-1.112 1.663A8.986 8.986 0 0 1 26 16c0 2.822-1.3 5.338-3.332 6.988l1.11 1.662A10.952 10.952 0 0 0 28 16c0-3.515-1.654-6.638-4.22-8.65z"></path><path d="M21.55 10.687l-1.122 1.68a4.971 4.971 0 0 1 1.58 3.634 4.98 4.98 0 0 1-1.58 3.64l1.122 1.68A7.005 7.005 0 0 0 24 16c0-2.127-.952-4.03-2.45-5.313z"></path><circle cx="19.79" cy="15.999" r="1"></circle><path d="M16 5c-1.177 0-1.533.684-1.533.684s-3.06 3.363-5.17 4.847c-.387.25-.813.47-1.567.47H6c-1.104 0-2 .9-2 2v6c0 1.107.896 2 2 2h1.73c.754 0 1.18.226 1.566.47 2.107 1.486 5.17 4.85 5.17 4.85S14.822 27 16 27a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z"></path></g></svg></span>NewsAlloy </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#newsisfree" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_newsisfree" style="background-color: rgb(49, 108, 169);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M23.44 5.83L11.072 21.66l-3.988-5.28-2.045 1.89 6.03 7.9L26.96 5.83"></path></svg></span>NewsIsFree </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#outlook" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_outlook_com" style="background-color: rgb(0, 114, 198);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M19.52 8.29v5.5l1.92 1.208a.474.474 0 0 0 .212 0l8.27-5.574c0-.66-.613-1.134-.962-1.134h-9.44z"></path><path d="M19.52 15.84l1.755 1.204c.246.183.543 0 .543 0-.297.183 8.104-5.397 8.104-5.397V21.75c0 1.102-.704 1.562-1.496 1.562H19.52V15.84zm-9.075-2.535c-.6 0-1.073.282-1.426.842-.357.56-.53 1.305-.53 2.23 0 .936.173 1.677.53 2.22.345.546.81.82 1.38.82.59 0 1.053-.266 1.4-.795.342-.53.515-1.266.515-2.206 0-.984-.17-1.744-.502-2.288-.333-.55-.79-.823-1.37-.823z"></path><path d="M2.123 5.5v21.51l16.362 3.428V2.33L2.123 5.5zm10.95 14.387c-.693.91-1.594 1.367-2.706 1.367-1.082 0-1.967-.442-2.65-1.324-.68-.88-1.02-2.03-1.02-3.448 0-1.496.343-2.707 1.037-3.63.693-.926 1.614-1.388 2.754-1.388 1.08 0 1.955.438 2.62 1.324.667.885 1 2.05 1 3.495.004 1.496-.345 2.695-1.034 3.604z"></path></g></svg></span>Outlook </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#podnova" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_podnova" style="background-color: rgb(181, 4, 25);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M3.395 13.422l2.5 1.67c2.482-3.052 6.262-5.007 10.5-5.007 4.242 0 8.022 1.955 10.503 5.007l2.498-1.67c-3.023-3.856-7.717-6.342-13-6.342s-9.976 2.485-13 6.342z"></path><path d="M8.41 16.772l2.526 1.687a7.46 7.46 0 0 1 5.46-2.38c2.16 0 4.09.92 5.463 2.376l2.52-1.688c-1.933-2.25-4.79-3.683-7.99-3.683-3.194 0-6.052 1.43-7.982 3.682z"></path><circle cx="16.395" cy="20.417" r="2"></circle></g></svg></span>PodNova </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#protopage_news_feeds" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_protopage" style="background-color: rgb(65, 63, 255);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" stroke="#FFF" stroke-miterlimit="10" d="M17.866 14.47l7.626-1.048.574 3.078-7.68 1.038 3.54 7.058-2.804 1.418-3.614-7.23-5.873 5.557-2.144-2.29 5.74-5.42-6.86-3.6 1.595-2.697 6.808 3.595 1.3-7.375 3.1.546-1.303 7.373z"></path></svg></span>Protopage News Feeds </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#symbaloo_feeds" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_symbaloo" style="background-color: rgb(109, 168, 247);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M7 7h4.5v4.5H7zm6.75 0h4.5v4.5h-4.5zm6.75 0H25v4.5h-4.5zM7 13.75h4.5v4.5H7zm6.75 0h4.5v4.5h-4.5zm6.75 0H25v4.5h-4.5zM7 20.5h4.5V25H7zm6.75 0h4.5V25h-4.5zm6.75 0H25V25h-4.5z" fill="#FFF"></path></svg></span>Symbaloo Feeds </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#the_free_dictionary" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_thefreedictionary" style="background-color: rgb(0, 75, 133);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M27.074 18.342a4.149 4.149 0 0 1-4.142 4.156 4.15 4.15 0 0 1-4.143-4.156 4.146 4.146 0 0 1 4.14-4.155c.98 0 1.88.344 2.59.915l.373.34a4.147 4.147 0 0 1 1.178 2.9m-13.834 0a4.156 4.156 0 1 1-8.311 0 4.156 4.156 0 0 1 8.311 0m14.76 0a5.079 5.079 0 0 0-2.26-4.23l-5.912-5.38c-.142-.13-.4-.1-.58.065-.183.164-.214.4-.074.53l4.366 3.972c-.2-.028-.4-.04-.607-.04-2.8-.005-5.07 2.272-5.07 5.08 0 .103.01.205.015.31a2.75 2.75 0 0 0-3.726-.002c.006-.104.016-.205.016-.31a5.084 5.084 0 0 0-5.084-5.083c-.238 0-.47.023-.698.054l4.465-4.064c.14-.128.11-.366-.07-.53-.183-.165-.44-.193-.583-.065l-6.284 5.72c-.17.135-.33.28-.48.436l-.03.03.002.002a5.082 5.082 0 1 0 8.557 4.937 2.76 2.76 0 0 1 4.11 0 5.07 5.07 0 0 0 4.86 3.65c2.8 0 5.068-2.276 5.068-5.084"></path></svg></span>The Free Dictionary </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#the_free_library" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_thefreelibrary" style="background-color: rgb(0, 75, 133);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M5 22.92a2.507 2.507 0 0 0 2.504 2.504H25.61V24.31h-1.16v-2.782h1.16v-.486H27V19.93h-.834v-2.782H27v-1.112h-.904v-.952l-1.374-2.573h1.444v-1.494l-3.63-4.438H9.726L6.42 11.782a2.494 2.494 0 0 0-.933 1.936 2.503 2.503 0 0 0 2.478 2.5A2.508 2.508 0 0 0 6.39 18.54c0 .764.352 1.44.893 1.9A2.493 2.493 0 0 0 5 22.92zm1.6-9.203c0-.52.288-.967.71-1.206h16.584v2.6H7.99c-.766 0-1.39-.624-1.39-1.39zm2.294 3.43h16.16v2.78H8.894a1.39 1.39 0 1 1 0-2.78zm-1.39 4.38h15.833v2.783H7.504a1.393 1.393 0 0 1-1.392-1.39c0-.768.624-1.392 1.392-1.392z"></path></svg></span>The Free Library </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#winksite" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_winksite" style="background-color: rgb(111, 231, 56);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M20.777 13.256a4.777 4.777 0 0 0-4.786-4.77c-1.74 0-3.26.926-4.1 2.312a4.787 4.787 0 0 0-4.1-2.313c-2.647 0-4.79 2.137-4.79 4.77 0 1.372.58 2.607 1.51 3.477l6.852 6.535a.685.685 0 0 0 1.022.032l6.886-6.57h-.002a4.747 4.747 0 0 0 1.51-3.477"></path><path d="M29 13.256c0-2.635-2.143-4.77-4.786-4.77-1.363 0-2.592.57-3.464 1.48.592.895.938 1.963.938 3.115 0 1.636-.69 3.107-1.798 4.14h.002l-3.324 3.17 3.016 2.88a.677.677 0 0 0 1.018.032l6.885-6.567a4.744 4.744 0 0 0 1.51-3.476z"></path></g></svg></span>WINKsite </a><i class="a2a_i"></i><i class="a2a_i"></i></div><div class="a2a_full_footer"><a href="https://www.addtoany.com/" title="Share Buttons" rel="noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_a2a" style="background-color:#0166ff"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M14 7h4v18h-4z"></path><path d="M7 14h18v4H7z"></path></g></svg></span>AddToAny</a></div></div><div id="a2afeed_dropdown" class="a2a_menu a2a_mini a2a_localize" onmouseenter="a2a.miniEnterStay()" onmouseleave="a2a.miniLeaveDelay()" tabindex="-1" aria-label="Subscribe" data-a2a-localize="label,Subscribe" style="display:none"><div id="a2afeed_title_container" class="a2a_menu_title_container" style="display:none"><div id="a2afeed_title" class="a2a_menu_title"></div></div><div class="a2a_mini_services" id="a2afeed_mini_services"><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#feed" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_feed" style="background-color: rgb(227, 112, 45);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><ellipse cx="7.952" cy="24.056" rx="2.952" ry="2.944"></ellipse><path d="M5.153 16.625c2.73 0 5.295 1.064 7.22 2.996a10.2 10.2 0 0 1 2.996 7.255h4.2c0-7.962-6.47-14.44-14.42-14.44v4.193zm.007-7.432c9.724 0 17.636 7.932 17.636 17.682H27C27 14.812 17.203 5 5.16 5v4.193z"></path></g></svg></span>Feed </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#feedly" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_feedly" style="background-color: rgb(43, 178, 76);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M6.33 16.118L18.507 4h.536l2.566 2.507v.597l-11.4 11.402H8.282l-1.956-1.85m4.855 4.106l7.323-7.316h.536l2.567 2.507v.597l-6.546 6.598-1.922.194-1.955-2.043m4.774 4.31l2.605-2.464h.538l2.567 2.508v.597L19.84 28h-1.924l-1.956-1.85" fill="#FFF"></path></svg></span>Feedly </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#my_yahoo" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_yahoo" style="background-color: rgb(64, 0, 144);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M21.495 6.097c1.09.31 2.213.28 3.304 0l-7.42 12.09v9.91a4.366 4.366 0 0 0-1.37-.22c-.47 0-.937.065-1.404.22v-9.91L7.19 6.097c1.09.28 2.213.31 3.304 0l5.516 8.788 5.483-8.787z"></path></svg></span>My Yahoo </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#feedblitz" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_feedblitz" style="background-color: rgb(255, 139, 35);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M14.935 6.168l2.89.446v5.695h.12c1.094-.937 2.556-.886 4.376-.886 2.065 0 3.61.568 4.638 1.706 1.03 1.14 1.544 2.94 1.544 5.4 0 2.517-.69 4.392-2.062 5.623C25.053 25.386 23.11 26 20.598 26c-1.233 0-3.025-.643-3.025-.44 0 .297.482.19-2.637.19V6.167zm2.89 17.54a6.61 6.61 0 0 0 1.385.35c.548.083 1.13.125 1.745.125 1.393 0 2.495-.462 3.312-1.386.815-.922 1.224-2.345 1.224-4.266 0-.8-.07-1.52-.22-2.163a5.005 5.005 0 0 0-.68-1.666 3.15 3.15 0 0 0-1.202-1.076c-.498-.25-1.09-.377-1.788-.377-.963 0-1.76.2-2.39.602-.63.4-1.09.945-1.384 1.635v8.224zM12.6 7.888c-.432-.044-.84-.07-1.23-.07-.557 0-.986.076-1.292.224-.305.15-.534.382-.688.7-.15.317-.247.723-.29 1.216-.042.495-.062 6.307-.062 7.015l3.09.02.316 2.6-3.406-.02v6.176h-3v-6.18H3.5l.466-2.6H6.04v-5.99c0-1.753.375-3.02 1.126-3.804C7.913 6.39 9.19 6 10.994 6c.722 0 1.376.028 1.96.084" fill="#FFF"></path></svg></span>FeedBlitz </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#my_aol" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_aol" style="background-color: rgb(42, 42, 42);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M17.334 13.26c-2.315 0-4.067 1.8-4.067 4.027 0 2.35 1.824 4.03 4.067 4.03 2.243 0 4.062-1.68 4.062-4.03 0-2.228-1.744-4.027-4.062-4.027zm0 2.127c1-.007 1.82.847 1.82 1.9 0 1.048-.82 1.9-1.82 1.9s-1.818-.853-1.818-1.9c0-1.053.817-1.9 1.818-1.9zm11.59 4.518c0 .778-.63 1.412-1.41 1.412a1.41 1.41 0 1 1 1.41-1.412zm-4.104 1.418h-2.216v-10.28h2.216v10.28zM9.33 11.04s2.585 6.79 3.862 10.13c.015.037.028.078.047.132-.06.006-.106.01-.15.01-.83.002-1.665-.003-2.498.004-.12.002-.17-.04-.204-.156-.116-.385-.247-.766-.365-1.147-.032-.11-.074-.153-.193-.153-1.066.006-2.132.006-3.2 0-.1 0-.142.03-.173.13-.127.405-.26.81-.39 1.21-.02.076-.05.117-.136.117-.873-.006-1.75-.004-2.623-.004-.016 0-.036-.005-.07-.012.023-.06.04-.115.064-.17 1.287-3.306 3.91-10.085 3.91-10.085h2.12zm-.023 6.674c-.343-1.147-.68-2.274-1.02-3.4h-.03l-1.017 3.4h2.067z" fill="#FFF"></path></svg></span>AOL Reader </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#oldreader" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_oldreader" style="background-color: rgb(215, 63, 49);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="none" d="M31.873 8.063c.043 0 .084-.006.127-.006V0h-8.057c0 .043-.006.084-.006.127a7.935 7.935 0 0 0 7.936 7.936zM16 7.398A17.519 17.519 0 0 1 7.398 16 17.519 17.519 0 0 1 16 24.602 17.519 17.519 0 0 1 24.602 16 17.523 17.523 0 0 1 16 7.398zM.127 23.938c-.043 0-.084.005-.127.006V32h8.057c0-.043.006-.084.006-.127a7.935 7.935 0 0 0-7.936-7.935zm17.46 7.935c0 .043.003.084.003.127h3.176c0-.043-.004-.084-.004-.127 0-6.137 4.975-11.11 11.11-11.11.044 0 .085.002.128.003V17.59l-.127-.002c-7.89 0-14.286 6.395-14.286 14.285zM.127 14.413h.008C8.022 14.41 14.413 8.016 14.413.13c0-.043-.003-.084-.003-.127h-3.176c0 .044.003.085.003.128 0 6.14-4.974 11.11-11.11 11.11H0v3.176c.04 0 .078.004.118.004h.01zm0 3.175c-.043 0-.084.002-.127.003v3.18c.043 0 .084-.005.127-.005 6.137 0 11.11 4.975 11.11 11.11 0 .044-.003.085-.003.128h3.176c0-.042.003-.083.003-.126 0-7.89-6.396-14.285-14.286-14.285z"></path><path fill="none" d="M23.938 31.873c0 .043.005.084.006.127H32v-8.057c-.043 0-.084-.006-.127-.006a7.934 7.934 0 0 0-7.935 7.936zm7.926-17.46h.018c.04 0 .08-.003.118-.003v-3.176c-.043 0-.084.003-.127.003-6.137 0-11.11-4.973-11.11-11.11 0-.043.002-.084.003-.127H17.59c0 .043-.003.084-.003.127 0 7.887 6.392 14.28 14.277 14.286zM8.062.127c0-.043-.006-.084-.006-.127H0v8.057c.043 0 .084.006.127.006A7.935 7.935 0 0 0 8.062.127z"></path><path fill="#FFF" d="M14.41 32h.006c0-.043-.003-.084-.003-.127 0 .043-.003.084-.003.127z"></path><path fill="#FFF" d="M14.413 31.873c0-2.596.57-5.057 1.587-7.27A17.52 17.52 0 0 0 7.398 16a17.391 17.391 0 0 1-7.27 1.587c-.044 0-.085-.003-.128-.003v.007h.127c7.89 0 14.286 6.396 14.286 14.286zM.127 20.763c-.043 0-.084.002-.127.003v3.178c.043 0 .084-.006.127-.006a7.936 7.936 0 0 1 7.936 7.935c0 .043-.006.084-.006.127h3.178c0-.043.003-.084.003-.127 0-6.137-4.974-11.11-11.11-11.11zM32 14.415v-.006h-.118c.04 0 .08.004.118.004zM16 7.398A17.519 17.519 0 0 0 24.602 16a17.383 17.383 0 0 1 7.263-1.587c-7.886-.005-14.277-6.4-14.277-14.286 0-.043.003-.084.003-.127h-.002c0 .043.003.084.003.127 0 2.596-.572 5.057-1.59 7.27zm15.873 3.84c.043 0 .084-.003.127-.004V8.057c-.043 0-.084.006-.127.006A7.934 7.934 0 0 1 23.938.127c0-.043.005-.084.006-.127h-3.178c0 .043-.004.084-.004.127 0 6.137 4.974 11.11 11.11 11.11z"></path><path fill="#FFF" d="M17.587 31.873c0-7.89 6.396-14.285 14.286-14.285.043 0 .084.002.127.003v-3.17c-.04 0-.078-.003-.118-.003h-.018c-2.593 0-5.05.572-7.263 1.587a17.549 17.549 0 0 0-8.6 8.603 17.421 17.421 0 0 0-1.585 7.27c0 .044.003.085.003.128h3.174l-.002-.126z"></path><path fill="#FFF" d="M20.762 31.873c0 .043.003.084.004.127h3.178c0-.043-.006-.084-.006-.127a7.934 7.934 0 0 1 7.935-7.935c.043 0 .084.005.127.006v-3.178c-.043 0-.084-.004-.127-.004-6.137 0-11.11 4.974-11.11 11.11zM7.398 16A17.523 17.523 0 0 0 16 7.398a17.385 17.385 0 0 0 1.587-7.27c0-.044-.003-.085-.003-.128H14.41c0 .043.003.084.003.127 0 7.887-6.392 14.28-14.278 14.286H.117c-.04 0-.078-.003-.117-.003v3.174c.043 0 .084.003.127.003 2.596 0 5.057-.57 7.27-1.587z"></path><path fill="#FFF" d="M11.237.127c0-.043-.003-.084-.003-.127H8.057c0 .043.006.084.006.127A7.936 7.936 0 0 1 .127 8.063c-.043 0-.084-.006-.127-.006v3.178c.043 0 .084.003.127.003 6.137 0 11.11-4.974 11.11-11.11z"></path></svg></span>The Old Reader </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#agregator" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_agregator" style="background-color: rgb(53, 148, 64);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M16 5C9.926 5 5 9.925 5 16c0 6.074 4.926 11 11 11s11-4.926 11-11c0-6.075-4.926-11-11-11zm-4.953 17.77c-1.003 0-1.816-.812-1.816-1.812s.817-1.812 1.82-1.812c1.004 0 1.817.812 1.817 1.812s-.813 1.812-1.817 1.812zm4.564-.08c0-1.69-.65-3.27-1.84-4.46s-2.763-1.846-4.443-1.846v-2.58c4.894 0 8.873 3.986 8.873 8.885h-2.59zm4.576.002c0-6-4.87-10.88-10.854-10.88V9.23c7.41 0 13.44 6.037 13.44 13.46h-2.586z"></path></svg></span>Agregator </a><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#bitty_browser_preview" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_bitty" style="background-color: rgb(153, 153, 153);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M4 4h12v12H4z"></path><path d="M20 4v16H4v8h24V4"></path></g></svg></span>Bitty Browser Preview </a></div><div id="a2afeed_cols_container" class="a2a_cols_container"><div class="a2a_col1" id="a2afeed_col1"></div><div id="a2afeed_2_col1" style="display:none"><a rel="nofollow noopener" class="a2a_i" href="http://www.jesse-anderson.com/#feedblitz" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_feedblitz" style="background-color: rgb(255, 139, 35);"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M14.935 6.168l2.89.446v5.695h.12c1.094-.937 2.556-.886 4.376-.886 2.065 0 3.61.568 4.638 1.706 1.03 1.14 1.544 2.94 1.544 5.4 0 2.517-.69 4.392-2.062 5.623C25.053 25.386 23.11 26 20.598 26c-1.233 0-3.025-.643-3.025-.44 0 .297.482.19-2.637.19V6.167zm2.89 17.54a6.61 6.61 0 0 0 1.385.35c.548.083 1.13.125 1.745.125 1.393 0 2.495-.462 3.312-1.386.815-.922 1.224-2.345 1.224-4.266 0-.8-.07-1.52-.22-2.163a5.005 5.005 0 0 0-.68-1.666 3.15 3.15 0 0 0-1.202-1.076c-.498-.25-1.09-.377-1.788-.377-.963 0-1.76.2-2.39.602-.63.4-1.09.945-1.384 1.635v8.224zM12.6 7.888c-.432-.044-.84-.07-1.23-.07-.557 0-.986.076-1.292.224-.305.15-.534.382-.688.7-.15.317-.247.723-.29 1.216-.042.495-.062 6.307-.062 7.015l3.09.02.316 2.6-3.406-.02v6.176h-3v-6.18H3.5l.466-2.6H6.04v-5.99c0-1.753.375-3.02 1.126-3.804C7.913 6.39 9.19 6 10.994 6c.722 0 1.376.028 1.96.084" fill="#FFF"></path></svg></span>FeedBlitz </a></div><div class="a2a_clear"></div></div><div class="a2afeed_wide a2a_wide"><a href="http://www.jesse-anderson.com/2016/03/hadoop-cheat-sheet/" id="a2afeed_show_more_less" class="a2a_menu_show_more_less a2a_more a2a_localize" title="Show all" data-a2a-localize="title,ShowAll"><span class="a2a_svg a2a_s__default a2a_s_a2a" style="background-color:#0166ff"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M14 7h4v18h-4z"></path><path d="M7 14h18v4H7z"></path></g></svg></span><span class="a2a_localize" data-a2a-localize="inner,More">More…</span></a></div></div><div style="height: 1px; width: 1px; position: absolute; z-index: 100000; top: 0px; visibility: hidden;"><iframe id="a2afeed_sm_ifr" height="1" width="1" title="AddToAny Utility Frame" transparency="true" allowtransparency="true" frameborder="0" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/sm.21.html" style="height: 1px; width: 1px; border: 0px; left: 0px; top: 0px; position: absolute; z-index: 100000; display: none;"></iframe></div></div><script type="text/javascript">
+			</script>
+	<div class="custom-footer"><div id="footer_copyright-2" class="widget widget_footer_copyright"><div class="widget-wrap"><div class="footer-putter-credits footer-center single"><div class="footer-putter-menu "><ul id="menu-footer" class="menu"><li id="menu-item-704" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-704"><a href="http://www.jesse-anderson.com/aboutme/">About Me</a></li>
+<li id="menu-item-705" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-705"><a href="http://www.jesse-anderson.com/contact/">Contact</a></li>
+</ul></div><div class="footer-putter-copyright "><span class="copyright">© JESSE ANDERSON ALL RIGHTS RESERVED 2017-2018 jesse-anderson.com</span></div><div class="footer-putter-contact "></div></div></div></div></div><!-- end .custom-footer -->            <script type="text/javascript">
+            var sub = document.getElementById('submit');
+            document.getElementById('recaptcha-submit-btn-area').appendChild (sub);
+            document.getElementById('submit').tabIndex = 6;
+            if ( typeof _recaptcha_wordpress_savedcomment != 'undefined') {
+                document.getElementById('comment').value = 
+                    _recaptcha_wordpress_savedcomment;
+            }
+            </script><link rel="stylesheet" id="wp-markdown-editor-css" href="./Hadoop Cheat Sheet _ Jesse Anderson_files/markdown-editor.css" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpcf7 = {"apiSettings":{"root":"http:\/\/www.jesse-anderson.com\/wp-json\/contact-form-7\/v1","namespace":"contact-form-7\/v1"},"recaptcha":{"messages":{"empty":"Please verify that you are not a robot."}},"cached":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/scripts.js.download"></script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/idle-timer.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var monarchSettings = {"ajaxurl":"http:\/\/www.jesse-anderson.com\/wp-admin\/admin-ajax.php","pageurl":"http:\/\/www.jesse-anderson.com\/2016\/03\/hadoop-cheat-sheet\/","stats_nonce":"9bb0b3cc9e","share_counts":"c1c1398307","follow_counts":"c0a0cda19c","total_counts":"3500c839a5","media_single":"21210257b9","media_total":"5a4d40db9b","generate_all_window_nonce":"f40395e28a","no_img_message":"No images available for sharing on this page"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/custom.js.download"></script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/comment-reply.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var DIVI = {"item_count":"%d Item","items_count":"%d Items"};
+var et_shortcodes_strings = {"previous":"Previous","next":"Next"};
+var et_pb_custom = {"ajaxurl":"http:\/\/www.jesse-anderson.com\/wp-admin\/admin-ajax.php","images_uri":"http:\/\/www.jesse-anderson.com\/wp-content\/themes\/Divi\/images","builder_images_uri":"http:\/\/www.jesse-anderson.com\/wp-content\/themes\/Divi\/includes\/builder\/images","et_frontend_nonce":"cd17cab326","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"2b3253dc2d","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","is_builder_plugin_used":"","ignore_waypoints":"no","is_divi_theme_used":"1","widget_search_selector":".widget_search","is_ab_testing_active":"","page_id":"186","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"yes","is_shortcode_tracking":"","tinymce_uri":""};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/custom.min.js.download"></script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/prettify.min.js.download"></script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/common.js.download"></script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/wp-embed.min.js.download"></script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/markdown.min.js.download"></script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/markdown-converter.min.js.download"></script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/markdown-sanitizer.min.js.download"></script>
+<script type="text/javascript" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/markdown-editor.min.js.download"></script>
+
+			<!-- BEGIN: wpflow ga events array -->
+			<script>
+						
+						jQuery(document).ready(function() {
+							scroll_events.bind_events( {
+								"universal":1,
+								"advancedmode":1,
+								"gtm":0,
+								"gst":0,
+								"page":"Hadoop Cheat Sheet",
+								"nofollow":"",								
+								"link_clicks_delay":0,
+"link_track": {"track":"", "type": "all", "link_class": ""},"scroll_elements": [{"select":"#header_section","category":"Page Scroll","action":"PDE Sales Page","label":"01 Header","bounce":"false","evalue":"",},{"select":"#pains_me_section","category":"Page Scroll","action":"PDE Sales Page","label":"02 Pains Me","bounce":"false","evalue":"",},{"select":"#paint_picture_section","category":"Page Scroll","action":"PDE Sales Page","label":"03 Paint Picture","bounce":"false","evalue":"",},{"select":"#how_make_it_happen_section","category":"Page Scroll","action":"PDE Sales Page","label":"04 How Make It Happen","bounce":"false","evalue":"",},{"select":"#principles_section","category":"Page Scroll","action":"PDE Sales Page","label":"05 Principles","bounce":"false","evalue":"",},{"select":"#actual_principles_section","category":"Page Scroll","action":"PDE Sales Page","label":"06 Actual Principles","bounce":"false","evalue":"",},{"select":"#principles_in_training_section","category":"Page Scroll","action":"PDE Sales Page","label":"07 Principles in Training","bounce":"false","evalue":"",},{"select":"#same_materials_section","category":"Page Scroll","action":"PDE Sales Page","label":"08 Same Materials","bounce":"false","evalue":"",},{"select":"#trailer_section","category":"Page Scroll","action":"PDE Sales Page","label":"09 Trailer","bounce":"false","evalue":"",},{"select":"#offer_and_faq_section","category":"Page Scroll","action":"PDE Sales Page","label":"10 Offer and FAQ","bounce":"false","evalue":"",},{"select":"#youll_get_and_need_section","category":"Page Scroll","action":"PDE Sales Page","label":"11 Youll Get and Need","bounce":"false","evalue":"",},{"select":"#module_1_section","category":"Page Scroll","action":"PDE Sales Page","label":"12 Module 1","bounce":"false","evalue":"",},{"select":"#module_2_section","category":"Page Scroll","action":"PDE Sales Page","label":"13 Module 2","bounce":"false","evalue":"",},{"select":"#module_3_section","category":"Page Scroll","action":"PDE Sales Page","label":"14 Module 3","bounce":"false","evalue":"",},{"select":"#module_4_section","category":"Page Scroll","action":"PDE Sales Page","label":"15 Module 4","bounce":"false","evalue":"",},{"select":"#module_5_section","category":"Page Scroll","action":"PDE Sales Page","label":"16 Module 5","bounce":"false","evalue":"",},{"select":"#module_6_section","category":"Page Scroll","action":"PDE Sales Page","label":"17 Module 6","bounce":"false","evalue":"",},{"select":"#module_7_section","category":"Page Scroll","action":"PDE Sales Page","label":"18 Module 7","bounce":"false","evalue":"",},{"select":"#module_8_section","category":"Page Scroll","action":"PDE Sales Page","label":"19 Module 8","bounce":"false","evalue":"",},{"select":"#email_support_section","category":"Page Scroll","action":"PDE Sales Page","label":"20 Email Support","bounce":"false","evalue":"",},{"select":"#limited_time_offer_section","category":"Page Scroll","action":"PDE Sales Page","label":"21 Limited Time Offer","bounce":"false","evalue":"",},{"select":"#guarantee_section","category":"Page Scroll","action":"PDE Sales Page","label":"22 Guarantee","bounce":"false","evalue":"",},{"select":"#pricing_table_1_section","category":"Page Scroll","action":"PDE Sales Page","label":"22 Pricing Table 1","bounce":"false","evalue":"",},{"select":"#installment_plans_1_section","category":"Page Scroll","action":"PDE Sales Page","label":"23 Installment Plans 1","bounce":"false","evalue":"",},{"select":"#personal_note_section","category":"Page Scroll","action":"PDE Sales Page","label":"24 Personal Note","bounce":"false","evalue":"",},{"select":"#pricing_table_2_section","category":"Page Scroll","action":"PDE Sales Page","label":"25 Pricing Table 2","bounce":"false","evalue":"",},{"select":"#installment_plans_2_section","category":"Page Scroll","action":"PDE Sales Page","label":"26 Installment Plans 2","bounce":"false","evalue":"",},{"select":"#group_and_company_section","category":"Page Scroll","action":"PDE Sales Page","label":"27 Group and Company","bounce":"false","evalue":"",},{"select":"#header_section","category":"Page Scroll","action":"Switching Careers Page","label":"01 Header","bounce":"false","evalue":"",},{"select":"#initial_questions","category":"Page Scroll","action":"Switching Careers Page","label":"02 Initial Questions","bounce":"true","evalue":"",},{"select":"#book_intro","category":"Page Scroll","action":"Switching Careers Page","label":"03 Book Intro","bounce":"true","evalue":"",},{"select":"#testimonials","category":"Page Scroll","action":"Switching Careers Page","label":"04 Testimonials","bounce":"true","evalue":"",},{"select":"#first_cta","category":"Page Scroll","action":"Switching Careers Page","label":"05 First CTA","bounce":"true","evalue":"",},{"select":"#youll_learn_header","category":"Page Scroll","action":"Switching Careers Page","label":"06 Youll Learn Header","bounce":"true","evalue":"",},{"select":"#youll_learn","category":"Page Scroll","action":"Switching Careers Page","label":"07 Youll Learn Body","bounce":"true","evalue":"",},{"select":"#second_cta","category":"Page Scroll","action":"Switching Careers Page","label":"08 Second CTA","bounce":"true","evalue":"",},{"select":"#real_header","category":"Page Scroll","action":"Real-time Sales Page","label":"01 Header","bounce":"false","evalue":"",},{"select":"#consistent_problem","category":"Page Scroll","action":"Real-time Sales Page","label":"02 Consistent Problem","bounce":"false","evalue":"",},{"select":"#real_increase_complexity","category":"Page Scroll","action":"Real-time Sales Page","label":"03 Increase in Complexity","bounce":"false","evalue":"",},{"select":"#four_types_technologies","category":"Page Scroll","action":"Real-time Sales Page","label":"04 Four Types of Tech","bounce":"false","evalue":"",},{"select":"#real_introducing_class","category":"Page Scroll","action":"Real-time Sales Page","label":"10 Introducing Real-time","bounce":"false","evalue":"",},{"select":"#real_class_covers","category":"Page Scroll","action":"Real-time Sales Page","label":"11 Class Covers","bounce":"false","evalue":"",},{"select":"#real_class_chapters","category":"Page Scroll","action":"Real-time Sales Page","label":"12 Class Chapters","bounce":"false","evalue":"",},{"select":"#real_designed_for","category":"Page Scroll","action":"Real-time Sales Page","label":"13 Designed For","bounce":"false","evalue":"",},{"select":"#real_where_taught","category":"Page Scroll","action":"Real-time Sales Page","label":"20 Where Taught","bounce":"false","evalue":"",},{"select":"#real_faq","category":"Page Scroll","action":"Real-time Sales Page","label":"21 FAQ","bounce":"false","evalue":"",},{"select":"#real_testimonials","category":"Page Scroll","action":"Real-time Sales Page","label":"22 Testimonials","bounce":"false","evalue":"",},{"select":"#real_guarantee","category":"Page Scroll","action":"Real-time Sales Page","label":"30 Guarantee","bounce":"false","evalue":"",},{"select":"#real_pricing_1","category":"Page Scroll","action":"Real-time Sales Page","label":"40 Pricing 1","bounce":"false","evalue":"",},{"select":"#real_right_for_you","category":"Page Scroll","action":"Real-time Sales Page","label":"41 Right for you","bounce":"false","evalue":"",},{"select":"#real_pricing_2","category":"Page Scroll","action":"Real-time Sales Page","label":"42 Pricing 1","bounce":"false","evalue":"",},{"select":"#real_groups","category":"Page Scroll","action":"Real-time Sales Page","label":"43 Group","bounce":"false","evalue":"",}],"click_elements": [{"select":"div.et_bloom_optin_14 div div div form button","category":"List Subscribe","action":"Inline Form","label":"Data Engineer Subscribe","bounce":"false","evalue":""},{"select":".et_bloom_popup>.et_bloom_popup_container>.et_bloom_form_container_wrapper>.et_bloom_form_content>.clearfix>.et_bloom_submit_subscription","category":"List Subscribe","action":"Popup Form","label":"Data Engineer Subscribe","bounce":"false","evalue":""},{"select":"div.et_bloom_optin_6 div div div form button","category":"List Subscribe","action":"Inline Form","label":"Data Engineer Subscribe","bounce":"false","evalue":""},{"select":"div.et_bloom_optin_1 div div div form button","category":"List Subscribe","action":"Inline Form Superficial","label":"Data Engineer Subscribe","bounce":"false","evalue":""},{"select":"div.et_bloom_optin_4 div div div form button","category":"List Subscribe","action":"Inline Form PDE Inline","label":"Pro Data Engineer Subscribe","bounce":"false","evalue":""},{"select":"div.et_bloom_optin_5 div div div form button","category":"List Subscribe","action":"Inline Form Real-time Pipelines","label":"Real-time Data Pipelines Subscribe","bounce":"false","evalue":""},{"select":"div.et_bloom_optin_2 div div div form button","category":"List Subscribe","action":"Inline Form Newsletter","label":"Data Engineer Subscribe","bounce":"false","evalue":""}],"youtube_videos": {},"vimeo_videos": {}
+									});} //end function
+		
+		);
+		</script>
+		<!-- END: wpflow ga events array -->
+
+		
+
+
+<!-- Dynamic page generated in 1.597 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2018-11-22 04:00:39 -->
+
+<!-- super cache --><div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none; max-width: none;"></div></div><div style="background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px; position: absolute; transition: visibility 0s linear 0.3s, opacity 0.3s linear 0s; opacity: 0; visibility: hidden; z-index: 2000000000; left: 0px; top: -10000px;"><div style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 2000000000; background-color: rgb(255, 255, 255); opacity: 0.05;"></div><div class="g-recaptcha-bubble-arrow" style="border: 11px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -11px; z-index: 2000000000;"></div><div class="g-recaptcha-bubble-arrow" style="border: 10px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -10px; z-index: 2000000000;"></div><div style="z-index: 2000000000; position: relative;"><iframe title="recaptcha challenge" src="./Hadoop Cheat Sheet _ Jesse Anderson_files/bframe.html" name="c-8kxno289f2si" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox" style="width: 100%; height: 100%;"></iframe></div></div></body></html>
